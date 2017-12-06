@@ -15,30 +15,24 @@ namespace SocialTap.Services.Notification_Services
 
         public static void FindSubscribers(NotificationHandling handler, Drink drink)
         {
-             using (ApplicationDbContext db = new ApplicationDbContext())
-            {
-                // Accounts = db.UserAccount.ToList();
+            handler.NewDrink += InsertNotification;
 
-                //  handler.NewDrink += InsertNotification;
-
-                // handler.NewDrinkUploaded(CreateNotification(drink));
-            }
+            handler.NewDrinkUploaded(CreateNotification(drink));
         }
 
-        /*   private static void InsertNotification(object o, NotificationEventArgs noti)
+           private static void InsertNotification(object o, NotificationEventArgs noti)
            {
                using (ApplicationDbContext db = new ApplicationDbContext())
                {
                    Notification notification = noti.Notification;
                    db.Notifications.Add(notification);
-   
-                   var users = db.UserAccount.ToList();
-                   var usersAll = db.Users.
+
+                   var users = db.Users.ToList();   
                    foreach (var user in users)
                    {
                        NotificationUser ns = new NotificationUser()
                        {
-                           AccountUserID = user.UserID,
+                           AccountUserID = user.Id,
                            NotificationId = notification.Id
                        };
                        db.NotificationUsers.Add(ns);
@@ -50,14 +44,12 @@ namespace SocialTap.Services.Notification_Services
            private static NotificationEventArgs CreateNotification(Drink Drink)
            {
                Notification notification = new Notification();
-               using (ApplicationDbContext db = new ApplicationDbContext())
-               {
-                   notification.Drink = Drink;
-               }
+               notification.Drink = Drink;
+
                return new NotificationEventArgs()
                {
                    Notification = notification
                };
-           }*/
+           }
     }
 }

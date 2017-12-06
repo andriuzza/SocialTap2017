@@ -65,7 +65,7 @@ namespace SocialTap.DataAccess.Repositories
 
         public CommonResult<IEnumerable<LocationFormDto>> ShowBarsInformaiton(string sortOrder, string searchString = null)
         {
-            if (_db.Locations.Count() == 0)
+            if (!_db.Locations.Any())
             {
                 return CommonResult<IEnumerable<LocationFormDto>>
                     .Failure<IEnumerable<LocationFormDto>>
@@ -77,8 +77,6 @@ namespace SocialTap.DataAccess.Repositories
             con.ConnectionString = ConnectionString;
             var select = new SqlCommand("SELECT Name, Address, Latitude, Longitude" +
                                                " FROM Locations", con);
-
-        //    select.Parameters.AddWithValue("@Name", searchString);
             adapter.SelectCommand = select;
 
             var ds = new DataSet();
