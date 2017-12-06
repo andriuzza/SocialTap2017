@@ -15,7 +15,7 @@ namespace SocialTap.Services.Notification_Services
 
         public static void FindSubscribers(NotificationHandling handler, Drink drink)
         {
-          //   using (ApplicationDbContext db = new ApplicationDbContext())
+             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 // Accounts = db.UserAccount.ToList();
 

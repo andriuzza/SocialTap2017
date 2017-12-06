@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ namespace SocialTap.WEB.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
+      
         public ICollection<NotificationUser> Notifications { get; set; }
 
         public ApplicationUser()
@@ -44,6 +46,24 @@ namespace SocialTap.WEB.Models
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<NotificationUser> NotificationUsers { get; set; }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+           base.OnModelCreating(modelBuilder);
+
+           modelBuilder.Entity<Drink>()
+                .HasRequired(u => u.LocationOfDrink)
+                .WithMany(e => e.Drinks)
+                .HasForeignKey(a => a.LocationOfDrinkId)
+                .WillCascadeOnDelete(true);
+
+
+            modelBuilder.Entity<NotificationUser>()
+                .HasRequired(a => a.UserAccount)
+                .WithMany(b => b.Notifications)
+                .WillCascadeOnDelete(false);
+
+
+        }
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

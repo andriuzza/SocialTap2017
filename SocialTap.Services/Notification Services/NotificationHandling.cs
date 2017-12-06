@@ -9,7 +9,6 @@ namespace SocialTap.Services.Notification_Services
 {
     public class NotificationHandling
     {
-
         public delegate void NewDrinkEventHandler(object o, NotificationEventArgs args);
 
         public event NewDrinkEventHandler NewDrink;
@@ -18,7 +17,6 @@ namespace SocialTap.Services.Notification_Services
 
         public NotificationHandling()
         {
-
         }
 
         public NotificationHandling(Drink Drink)
@@ -29,10 +27,7 @@ namespace SocialTap.Services.Notification_Services
 
         public virtual void NewDrinkUploaded(NotificationEventArgs noti)
         {
-            if (NewDrink != null)
-            {
-                NewDrink(this, noti);
-            }
+            NewDrink?.Invoke(this, noti);
         }
     }
 

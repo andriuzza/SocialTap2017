@@ -69,6 +69,10 @@
     <Compile Include="Migrations\201712060913289_PutRequiretoDrink.Designer.cs">
       <DependentUpon>201712060913289_PutRequiretoDrink.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712061547017_Notification.cs" />
+    <Compile Include="Migrations\201712061547017_Notification.Designer.cs">
+      <DependentUpon>201712061547017_Notification.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Drink.cs" />
     <Compile Include="Models\DrinkType.cs" />
@@ -100,6 +104,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712060913289_PutRequiretoDrink.resx">
       <DependentUpon>201712060913289_PutRequiretoDrink.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712061547017_Notification.resx">
+      <DependentUpon>201712061547017_Notification.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
