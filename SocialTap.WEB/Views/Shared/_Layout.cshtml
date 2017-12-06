@@ -3,9 +3,13 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - SocialTap</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+   
+    <link href="@Url.Content("~/Content/LayoutStyle.css")" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"> 
+
 
 </head>
 <body>
@@ -17,10 +21,28 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("SocialTap", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Upload
+                                <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Add a new drink", "Post", "Drinks")</li>
+                                <li>@Html.ActionLink("Add a new pub", "Post", "Locations")</li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Show
+                                <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Show bars", "ShowBars", "Locations")</li>
+                            </ul>
+                        </li>
+                    }
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
@@ -30,10 +52,10 @@
         </div>
     </div>
     <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        @RenderBody() 
+        <footer class="footerPosition">
+            <hr />
+            <p>&copy; @DateTime.Now.Year - SocialTap</p>
         </footer>
     </div>
 

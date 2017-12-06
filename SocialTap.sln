@@ -5,7 +5,11 @@ VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialTap.WEB", "SocialTap.WEB\SocialTap.WEB.csproj", "{03FC45AF-B60D-44E8-8B6F-764FFAB63C99}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialTap.WEB.Tests", "SocialTap.WEB.Tests\SocialTap.WEB.Tests.csproj", "{565585D1-6348-44A3-B1CD-A62F554D2FE7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialTap.DataAccess", "SocialTap.DataAccess\SocialTap.DataAccess.csproj", "{B29B1DC3-0A26-4058-95A4-4E1F8B488395}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialTap.Contract", "SocialTap.Contract\SocialTap.Contract.csproj", "{18582781-926F-4991-A34A-6FED724965C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialTap.Services", "SocialTap.Services\SocialTap.Services.csproj", "{5D314BC0-F660-4C21-AD1D-3DF414641599}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +21,18 @@ Global
 		{03FC45AF-B60D-44E8-8B6F-764FFAB63C99}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03FC45AF-B60D-44E8-8B6F-764FFAB63C99}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03FC45AF-B60D-44E8-8B6F-764FFAB63C99}.Release|Any CPU.Build.0 = Release|Any CPU
-		{565585D1-6348-44A3-B1CD-A62F554D2FE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{565585D1-6348-44A3-B1CD-A62F554D2FE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{565585D1-6348-44A3-B1CD-A62F554D2FE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{565585D1-6348-44A3-B1CD-A62F554D2FE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B29B1DC3-0A26-4058-95A4-4E1F8B488395}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B29B1DC3-0A26-4058-95A4-4E1F8B488395}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B29B1DC3-0A26-4058-95A4-4E1F8B488395}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B29B1DC3-0A26-4058-95A4-4E1F8B488395}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18582781-926F-4991-A34A-6FED724965C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18582781-926F-4991-A34A-6FED724965C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18582781-926F-4991-A34A-6FED724965C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18582781-926F-4991-A34A-6FED724965C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D314BC0-F660-4C21-AD1D-3DF414641599}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D314BC0-F660-4C21-AD1D-3DF414641599}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D314BC0-F660-4C21-AD1D-3DF414641599}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D314BC0-F660-4C21-AD1D-3DF414641599}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

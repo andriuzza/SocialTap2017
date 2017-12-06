@@ -100,7 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SocialTap.WEB\SocialTap.WEB.csproj">
-      <Project>{03FC45AF-B60D-44E8-8B6F-764FFAB63C99}</Project>
+      <Project>{03fc45af-b60d-44e8-8b6f-764ffab63c99}</Project>
       <Name>SocialTap.WEB</Name>
     </ProjectReference>
   </ItemGroup>

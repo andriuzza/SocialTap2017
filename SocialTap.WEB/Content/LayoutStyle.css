@@ -1,0 +1,47 @@
+﻿.panel-success > .panel-heading {
+    color: #386539;
+    background-color: #c88d8a;
+    border-color: #d6e9c6;
+}
+.navbar-inverse {
+    background-color: #dd414e;
+    border-color: #dd414e;
+}
+.navbar-inverse .navbar-brand {
+        color: #fff;
+}
+    .navbar-inverse .navbar-nav > li > a {
+        color: #fff;
+}
+.navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
+    color: #ffffff;
+    background-color: #d72f2fe6;
+}
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 2%;
+}
+.footerPosition {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: black;
+    text-align: center;
+}
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+    color: #ffffff;
+    background-color: #d72f2fe6;
+}
+.form-control {
+    border-radius: 12px;
+}
+.panel-success > .panel-heading {
+    color: #fff;
+    background-color: #ff0c00;
+    border-color: #f90b02;
+}

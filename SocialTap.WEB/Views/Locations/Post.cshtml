@@ -1,0 +1,28 @@
+﻿@model SocialTap.Contract.DataContracts.LocationFormDto
+@{
+    ViewBag.Title = "Post";
+}
+
+<h2>Upload a new bar</h2>
+<hr/>
+
+@using (Html.BeginForm("Post", "Locations", FormMethod.Post))
+{
+    @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @placeholder = "Name" })
+    @Html.ValidationMessageFor(m => m.Name)
+    <br />
+    @Html.TextBoxFor(model => model.Address, new { @class = "form-control", @placeholder = "Address" })
+    @Html.ValidationMessageFor(m => m.Address)
+    <br />
+    @Html.TextBoxFor(model => model.Latitude, new { @class = "form-control", @placeholder = "Latitude" })
+    @Html.ValidationMessageFor(m => m.Latitude)
+    <br />
+    @Html.TextBoxFor(model => model.Longitude, new { @class = "form-control", @placeholder = "Longitude" })
+    @Html.ValidationMessageFor(m => m.Longitude)
+    <br />
+    <input type="submit" value="Submit" class="btn btn-success btn-lg" />
+}
+@if (ViewBag.Message != "")
+{
+    <p style="color:green; font-size: 20px; text-align:center">@ViewBag.Message</p>
+}
