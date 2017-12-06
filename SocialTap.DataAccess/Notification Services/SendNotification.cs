@@ -15,11 +15,8 @@ namespace SocialTap.Services.Notification_Services
 
         public static void FindSubscribers(NotificationHandling handler, Drink drink)
         {
-             using (ApplicationDbContext db = new ApplicationDbContext())
-            {
-               handler.NewDrink += InsertNotification;
+             handler.NewDrink += InsertNotification;
              handler.NewDrinkUploaded(CreateNotification(drink));
-            }
         }
 
           private static void InsertNotification(object o, NotificationEventArgs noti)
@@ -46,10 +43,8 @@ namespace SocialTap.Services.Notification_Services
            private static NotificationEventArgs CreateNotification(Drink Drink)
            {
                Notification notification = new Notification();
-               using (ApplicationDbContext db = new ApplicationDbContext())
-               {
-                   notification.Drink = Drink;
-               }
+               notification.Drink = Drink;
+
                return new NotificationEventArgs()
                {
                    Notification = notification
