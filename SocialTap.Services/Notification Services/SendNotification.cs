@@ -17,7 +17,7 @@ namespace SocialTap.Services.Notification_Services
         {
              using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                // Accounts = db.UserAccount.ToList();
+               // Accounts = db.UserAccount.ToList();
 
                 //  handler.NewDrink += InsertNotification;
 
