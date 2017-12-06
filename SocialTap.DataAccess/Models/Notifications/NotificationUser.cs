@@ -13,7 +13,7 @@ namespace SocialTap.DataAccess.Models.Notifications
     {
         [Key]
         [Column(Order = 1)]
-        public int AccountUserID { get; set; }
+        public string AccountUserID { get; set; }
 
         public ApplicationUser UserAccount { get; set; }
 
