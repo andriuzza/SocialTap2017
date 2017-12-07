@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SocialTap.DataAccess.Models;
+using SocialTap.DataAccess.Notification_Services.IServices_of_Notifications;
+using SocialTap.DataAccess.Enums;
 
 namespace SocialTap.Services.Notification_Services
 {
@@ -13,18 +15,12 @@ namespace SocialTap.Services.Notification_Services
 
         public event NewDrinkEventHandler NewDrink;
 
-        public Drink LocalDrink { get; }
-
-        public NotificationHandling()
+        ISendNotification _notification;
+        public NotificationHandling(ISendNotification notification, string message)
         {
+            _notification = notification;
+            _notification.FindSubscribers(this, message);
         }
-
-        public NotificationHandling(Drink Drink)
-        {
-            LocalDrink = Drink;
-            SendNotification.FindSubscribers(this, LocalDrink);
-        }
-
         public virtual void NewDrinkUploaded(NotificationEventArgs noti)
         {
             NewDrink?.Invoke(this, noti);

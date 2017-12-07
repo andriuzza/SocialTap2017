@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\Notifications.cs" />
     <Compile Include="ExtensionMethod\StringContains.cs" />
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Migrations\201712051945295_Initialize.cs" />
@@ -73,6 +74,18 @@
     <Compile Include="Migrations\201712061547017_Notification.Designer.cs">
       <DependentUpon>201712061547017_Notification.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712070811096_NotificationChanges.cs" />
+    <Compile Include="Migrations\201712070811096_NotificationChanges.Designer.cs">
+      <DependentUpon>201712070811096_NotificationChanges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712070827377_NotificationId.cs" />
+    <Compile Include="Migrations\201712070827377_NotificationId.Designer.cs">
+      <DependentUpon>201712070827377_NotificationId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712071155192_changesOnNotifications.cs" />
+    <Compile Include="Migrations\201712071155192_changesOnNotifications.Designer.cs">
+      <DependentUpon>201712071155192_changesOnNotifications.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Drink.cs" />
     <Compile Include="Models\DrinkType.cs" />
@@ -82,6 +95,7 @@
     <Compile Include="Models\Feedbacks\LocationFeedback.cs" />
     <Compile Include="Models\Notifications\Notification.cs" />
     <Compile Include="Models\Notifications\NotificationUser.cs" />
+    <Compile Include="Notification Services\IServices of Notifications\ISendNotification.cs" />
     <Compile Include="Notification Services\NotificationEventArgs.cs" />
     <Compile Include="Notification Services\NotificationHandling.cs" />
     <Compile Include="Notification Services\SendNotification.cs" />
@@ -110,6 +124,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712061547017_Notification.resx">
       <DependentUpon>201712061547017_Notification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712070811096_NotificationChanges.resx">
+      <DependentUpon>201712070811096_NotificationChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712070827377_NotificationId.resx">
+      <DependentUpon>201712070827377_NotificationId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712071155192_changesOnNotifications.resx">
+      <DependentUpon>201712071155192_changesOnNotifications.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

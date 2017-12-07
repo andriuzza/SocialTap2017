@@ -11,7 +11,6 @@ namespace SocialTap.Services.Notification_Services
 
     public class NotificationEventArgs : EventArgs
     {
-        public Drink Drink { get; set; }
-        public Notification Notification { get; set; }
+        public string Message { get; set; }
     }
 }
