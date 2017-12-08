@@ -45,6 +45,7 @@ namespace SocialTap.WEB.Models
         public DbSet<LocationFeedback> LocationFeedbacks { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<NotificationUser> NotificationUsers { get; set; }
+        public DbSet<DrinkRating> DrinkRating { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

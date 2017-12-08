@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SocialTap.Contract.DataContracts
 {
-    public class LocationDto
+    public class Location
     {
         public int Id { get; set; }
         public string Name { get; set; }

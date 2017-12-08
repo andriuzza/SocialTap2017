@@ -44,6 +44,7 @@
     <Compile Include="DataContracts\BarsInfo.cs" />
     <Compile Include="DataContracts\DrinkDto.cs" />
     <Compile Include="DataContracts\DrinksInfoDto.cs" />
+    <Compile Include="DataContracts\LocationDrinkDto.cs" />
     <Compile Include="DataContracts\LocationDto.cs" />
     <Compile Include="DataContracts\LocationFormDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

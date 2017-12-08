@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using SocialTap.DataAccess.Models;
 using SocialTap.DataAccess.Notification_Services.IServices_of_Notifications;
-using SocialTap.DataAccess.Enums;
 
 namespace SocialTap.Services.Notification_Services
 {

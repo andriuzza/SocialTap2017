@@ -16,14 +16,14 @@ namespace SocialTap.Web.ViewModels
         public IEnumerable<DrinkType> DrinkTypes { get; set; }
 
         public int LocationId { get; set; }
-        public IEnumerable<LocationDto> Locations { get; set; }
+        public IEnumerable<Contract.DataContracts.Location> Locations { get; set; }
 
-        public string Message { get; set; } = "";
+        public string Message { get; set; }
 
         public DrinkViewModel()
         {
             DrinkTypes = new Collection<DrinkType>();
-            Locations = new Collection<LocationDto>();
+            Locations = new Collection<Contract.DataContracts.Location>();
         }
 
     }

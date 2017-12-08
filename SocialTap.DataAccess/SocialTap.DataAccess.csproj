@@ -59,7 +59,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enums\Notifications.cs" />
     <Compile Include="ExtensionMethod\StringContains.cs" />
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Migrations\201712051945295_Initialize.cs" />
@@ -86,8 +85,13 @@
     <Compile Include="Migrations\201712071155192_changesOnNotifications.Designer.cs">
       <DependentUpon>201712071155192_changesOnNotifications.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712081239500_AddRating.cs" />
+    <Compile Include="Migrations\201712081239500_AddRating.Designer.cs">
+      <DependentUpon>201712081239500_AddRating.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Drink.cs" />
+    <Compile Include="Models\DrinkRating.cs" />
     <Compile Include="Models\DrinkType.cs" />
     <Compile Include="Models\Feedbacks\DrinkFeedback.cs" />
     <Compile Include="Models\DrinkImage.cs" />
@@ -133,6 +137,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712071155192_changesOnNotifications.resx">
       <DependentUpon>201712071155192_changesOnNotifications.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712081239500_AddRating.resx">
+      <DependentUpon>201712081239500_AddRating.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

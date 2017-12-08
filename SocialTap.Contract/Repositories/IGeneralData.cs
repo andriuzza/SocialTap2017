@@ -11,5 +11,6 @@ namespace SocialTap.Contract.Repositories
     {
         CommonResult<IEnumerable<LocationFormDto>> ShowBarsInformaiton(string sortOrder, string searchString = null);
         CommonResult<IQueryable<DrinksInfoDto>> GetDrinksList();
+        IEnumerable<string> GetNotifications(string UserId);
     }
 }

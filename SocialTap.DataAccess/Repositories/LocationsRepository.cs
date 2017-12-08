@@ -9,7 +9,6 @@ using SocialTap.DataAccess.Models;
 using SocialTap.WEB.Models;
 using SocialTap.DataAccess.Notification_Services.IServices_of_Notifications;
 using SocialTap.Services.Notification_Services;
-using SocialTap.DataAccess.Enums;
 
 namespace SocialTap.DataAccess.Repositories
 {
@@ -24,7 +23,7 @@ namespace SocialTap.DataAccess.Repositories
         }
         public void Add(LocationFormDto local)
         {
-            _db.Locations.Add(new Location()
+            _db.Locations.Add(new Models.Location()
             {
                 Name = local.Name,
                 Latitude = local.Latitude,
