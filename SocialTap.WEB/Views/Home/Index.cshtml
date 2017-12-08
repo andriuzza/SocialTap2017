@@ -1,7 +1,23 @@
-﻿@{
+﻿@model SocialTap.WEB.ViewModels.RatingViewModel
+@{
     ViewBag.Title = "Home Page";
 }
 
-
-    <img style="display: block; margin: 0 auto;"id="img_logo" alt="Logo" height="200" width="270" src="@Url.Content("~/Content/Images/pwl-logo-fp.jpg")" />    
-
+    <div class="row">
+    <img style="display: block; margin: 0 auto;" id="img_logo" alt="Logo" height="200" width="270" src="@Url.Content("~/Content/Images/pwl-logo-fp.jpg")" />
+    </div>
+<div class="col-md-offset-3">
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+    {
+        @Html.TextBoxFor(model => model.Rating, new { @class = "form-control HomePage", @placeholder = "Name" })
+        @Html.ValidationMessageFor(model => model.Rating)
+        <br />
+        @Html.DropDownListFor(model => model.LocationId, new SelectList(Model.Locations, "Id", "Name"), "", new { @class = "form-control HomePage", @placeholder = "Pubs" })
+        @Html.ValidationMessageFor(model => model.LocationId)
+        <br />
+        <div class="row">
+            <input type="submit" value="Submit" class="btn btn-success btn-lg" />      
+            </div>
+      
+    }
+</div>

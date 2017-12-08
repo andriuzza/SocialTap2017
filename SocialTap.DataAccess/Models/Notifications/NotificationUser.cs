@@ -13,15 +13,17 @@ namespace SocialTap.DataAccess.Models.Notifications
     {
         [Key]
         [Column(Order = 1)]
-        public string AccountUserID { get; set; }
-
+        
+        public string UserAccountId { get; set; }
+        [ForeignKey("UserAccountId")]
         public ApplicationUser UserAccount { get; set; }
 
         [Key]
         [Column(Order = 2)]
         public int NotificationId { get; set; }
-
+        [ForeignKey("NotificationId")]
         public Notification Notification { get; set; }
+
         public bool IsRead { get; set; }
     }
 

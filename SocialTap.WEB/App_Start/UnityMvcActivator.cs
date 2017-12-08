@@ -1,8 +1,8 @@
 using System.Linq;
 using System.Web.Mvc;
-
+using System.Web.Http;
 using Unity.AspNet.Mvc;
-
+using Unity.WebApi;
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(SocialTap.WEB.UnityMvcActivator), nameof(SocialTap.WEB.UnityMvcActivator.Start))]
 [assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(SocialTap.WEB.UnityMvcActivator), nameof(SocialTap.WEB.UnityMvcActivator.Shutdown))]
 
@@ -21,7 +21,9 @@ namespace SocialTap.WEB
             FilterProviders.Providers.Remove(FilterProviders.Providers.OfType<FilterAttributeFilterProvider>().First());
             FilterProviders.Providers.Add(new UnityFilterAttributeFilterProvider(UnityConfig.Container));
 
-            DependencyResolver.SetResolver(new UnityDependencyResolver(UnityConfig.Container));
+            DependencyResolver.SetResolver(new Unity.AspNet.Mvc.UnityDependencyResolver(UnityConfig.Container));
+
+            GlobalConfiguration.Configuration.DependencyResolver = new Unity.WebApi.UnityDependencyResolver(UnityConfig.Container);
 
             // TODO: Uncomment if you want to use PerRequestLifetimeManager
             // Microsoft.Web.Infrastructure.DynamicModuleHelper.DynamicModuleUtility.RegisterModule(typeof(UnityPerRequestHttpModule));

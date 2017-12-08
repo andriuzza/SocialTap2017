@@ -11,6 +11,7 @@ using SocialTap.Contract.Repositories;
 using SocialTap.Contract.Services;
 using SocialTap.DataAccess.ExtensionMethod;
 using SocialTap.WEB.Models;
+using Microsoft.AspNet.Identity;
 
 namespace SocialTap.DataAccess.Repositories
 {
@@ -61,6 +62,26 @@ namespace SocialTap.DataAccess.Repositories
 
             return CommonResult<IQueryable<DrinksInfoDto>>
                 .Success(DrinksList);
+        }
+
+        public IEnumerable<string> GetNotifications(string UserId)
+        {
+
+            var result = from noti in _db.NotificationUsers
+                            join a in _db.Notifications
+                               on noti.NotificationId equals a.Id
+                             where UserId == noti.UserAccountId
+                                 where noti.IsRead == false
+                                   select a.NotificationText;
+            if (result.Any())
+            {
+                return result;
+            }
+            IList<string> noInformation = new List<string>
+            {
+              "No notifications has been added for a while"
+            };
+            return noInformation;
         }
 
         public CommonResult<IEnumerable<LocationFormDto>> ShowBarsInformaiton(string sortOrder, string searchString = null)

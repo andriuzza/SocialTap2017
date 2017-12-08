@@ -18,11 +18,14 @@ namespace SocialTap.Services.Services
         {
             switch (Query)
             {
-                case "Price":
+                case "Address":
                     info = info.OrderBy(s => s.Address);
                     break;
                 case "name_desc":
                     info = info.OrderByDescending(s => s.Name);
+                    break;
+                case "address_desc":
+                    info = info.OrderByDescending(s => s.Address);
                     break;
 
                 default:

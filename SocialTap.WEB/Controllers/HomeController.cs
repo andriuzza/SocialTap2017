@@ -1,16 +1,15 @@
-﻿using SocialTap.Contract.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using SocialTap.Contract.DataContracts;
+﻿using System.Web.Mvc;
 using SocialTap.Contract.Repositories;
 using SocialTap.DataAccess.Models;
+using SocialTap.Web.ViewModels;
+using SocialTap.WEB.Models;
+using System.Linq;
+using SocialTap.WEB.ViewModels;
+using SocialTap.Contract.DataContracts;
 
 namespace SocialTap.WEB.Controllers
 {
-    
+
     public class HomeController : Controller
     {
         private readonly ISystemRepository<DrinkType> _typeService;
@@ -20,7 +19,36 @@ namespace SocialTap.WEB.Controllers
         }
         public ActionResult Index()
         {
-            return View();
+            using (ApplicationDbContext _db = new ApplicationDbContext())
+            {
+                var ViewRating = new RatingViewModel
+                {
+                    Locations = _db.Locations.Select(a => new Contract.DataContracts.Location
+                    {
+                        Name = a.Name,
+                        Id = a.Id
+                    }).ToList()
+                };
+
+                return View(ViewRating);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Index(RatingViewModel ViewRating)
+        {
+            using (ApplicationDbContext _db = new ApplicationDbContext())
+            {
+                DataAccess.Models.Location FoundLocation = _db.Locations
+                    .Where(a => a.Id == ViewRating.LocationId
+                    && ViewRating.Rating != 0).FirstOrDefault();
+
+                if(FoundLocation != null)
+                {
+                    return RedirectToAction("InsertRating", "Drinks", ViewRating);
+                }
+                return View();
+            }
         }
 
         public ActionResult About()

@@ -35,6 +35,14 @@
                                 <li>@Html.ActionLink("Add a new pub", "Post", "Locations")</li>
                             </ul>
                         </li>
+
+                        <li class="Show"><a><i class="glyphicon glyphicon-shopping-cart"></i><span class="badge" id="notCount"></span></a></li>
+
+                        
+
+
+
+
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Show
                                 <span class="caret"></span></a>
@@ -60,7 +68,50 @@
     </div>
 
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/notify")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/remarkable/1.7.1/remarkable.min.js"></script>
+    <script src="@Url.Content("~/Scripts/React/Notifications.jsx")"></script>
 </body>
 </html>
+<script type="text/javascript">
+    $(document).ready(function () {
+        string: [];
+
+        $.ajax({
+            url: 'http://localhost:59427/api/notifications',
+
+            type: 'GET',
+
+            dataType: 'json',
+
+            success: function (data, textStatus, xhr) {
+                $('#notCount').text(data.length);
+                console.log(data);
+                string = data;
+
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                console.log('Error in Database');
+            }
+        });
+       
+        $(".Show").popover({
+            html: true,
+            title: "Notifications",
+            content: function () {
+                var notification = "";
+                for (var i = 0; i < string.length; i++)
+                {
+                    notification += string[i];
+                   
+                }
+                return notification;
+            },
+            placement: "bottom"
+        })
+    })
+</script>

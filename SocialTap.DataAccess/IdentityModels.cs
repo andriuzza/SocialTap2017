@@ -45,6 +45,7 @@ namespace SocialTap.WEB.Models
         public DbSet<LocationFeedback> LocationFeedbacks { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<NotificationUser> NotificationUsers { get; set; }
+        public DbSet<DrinkRating> DrinkRating { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -57,10 +58,22 @@ namespace SocialTap.WEB.Models
                 .WillCascadeOnDelete(true);
 
 
-            modelBuilder.Entity<NotificationUser>()
-                .HasRequired(a => a.UserAccount)
-                .WithMany(b => b.Notifications)
-                .WillCascadeOnDelete(false);
+            /*  modelBuilder.Entity<NotificationUser>()
+                  .HasRequired(a => a.UserAccount)
+                  .WithMany(b => b.Notifications)
+                  .WillCascadeOnDelete(false);*/
+            /*modelBuilder.Entity<NotificationUser>()
+             .HasKey(c => new { c.UserAccountId, c.NotificationId });
+
+            modelBuilder.Entity<Notification>()
+                .HasMany(c => c.)
+                .WithRequired()
+                .HasForeignKey(c => c.ContractId);
+
+            modelBuilder.Entity<Media>()
+                .HasMany(c => c.ContractMedias)
+                .WithRequired()
+                .HasForeignKey(c => c.MediaId);*/
 
 
         }

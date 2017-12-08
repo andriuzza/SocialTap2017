@@ -12,6 +12,9 @@ using SocialTap.DataAccess.Models;
 using SocialTap.Web.ViewModels;
 using SocialTap.WEB.Models;
 using System.Web.Mvc;
+using SocialTap.WEB.ViewModels;
+using System.Data.Entity;
+
 namespace SocialTap.Web.Controllers
 {
     public class DrinksController : Controller
@@ -59,7 +62,7 @@ namespace SocialTap.Web.Controllers
             {
                 DrinkTypes = _db.DrinkTypes.ToList(),
                 Locations = from a in _db.Locations
-                    select new LocationDto
+                    select new Contract.DataContracts.Location
                     {
                         Id = a.Id,
                         Name = a.Name
@@ -82,7 +85,7 @@ namespace SocialTap.Web.Controllers
         {
            viewModel.DrinkTypes = _db.DrinkTypes.ToList();
             viewModel.Locations = from a in _db.Locations
-                select new LocationDto
+                select new Contract.DataContracts.Location
                 {
                     Id = a.Id,
                     Name = a.Name
@@ -107,10 +110,43 @@ namespace SocialTap.Web.Controllers
             viewModel.Message = validaiton.ErrorMessage;
             return View(viewModel);
         }
-    
-            /*     public ActionResult ShowDrinksList()
-             {
+        
 
-             }*/
+        public ActionResult InsertRating(RatingViewModel RatingView)
+        {
+            LocationDrinkDto showUserList;
+            IEnumerable<DrinkDto> drinks;
+            using (ApplicationDbContext _db = new ApplicationDbContext())
+            {
+                DataAccess.Models.Location Location = _db.Locations.Where(a => a.Id == RatingView.LocationId).FirstOrDefault();
+
+                drinks = (from a in _db.Drinks
+                         join b in _db.Locations
+                            on a.LocationOfDrinkId equals b.Id
+                         select new DrinkDto
+                         {
+                             Name = a.Name,
+                             Price = a.Price
+                         }).ToList();
+
+                showUserList = new LocationDrinkDto
+                {
+                    Address = Location.Address,
+                    PubName = Location.Name,
+                    Latitude = Location.Latitude,
+                    Longitude = Location.Longitude,
+                    Rating = RatingView.Rating
+                };
+
+
+            }
+
+
+            showUserList.Drinks = drinks;
+            return View(showUserList);
+
+
+
+        }
     }
 }
