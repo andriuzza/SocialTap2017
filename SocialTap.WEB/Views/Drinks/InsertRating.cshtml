@@ -5,46 +5,51 @@
 
 <div class="col-md-12">
     <div class="col-md-6">
-        <h4>@Model.PubName</h4>
-        <p>@Model.Address</p>
+        <h2>@Model.PubName</h2>
+        <p>@Model.Address Street</p>
         <hr />
-        <p>Your rating of a drink - @Model.Rating</p>
+        <p>Your rating of a drink <bold>@Model.Rating</bold></p>
 
 
-        <table class="table">
+        <table id="rating" class="table">
             <thead>
                 <tr>
                     <th>#</th>
                     <th>Drink Name</th>
                     <th>Price</th>
+                    <th>History</th>
                 </tr>
             </thead>
             <tbody>
         @foreach (var drink in Model.Drinks)
         {
                 <tr>
-                    <th scope="row">1</th>
+                    <td><button data-rating-id="@drink.Id"  class="btn-link sendRating">Rate</button></td>
                     <td>@drink.Name</td>
                     <td>@drink.Price</td>
+                    <td><a href="http://localhost:59427/Drinks/@drink.Id">Check History</a></td> 
                 </tr>
         }
             </tbody>
         </table>
     </div>
+
+
     <div class="col-md-6" >
-        <div id="map" style="height:91.5vh; margin-bottom:30px; padding-top: 40px; width: 100%; padding: 0; margin: 0">
+        <div id="map" style="height:70.5vh; width: 95.5vh; margin-bottom:30px; padding-top: 40px; width: 100%; padding: 0; margin: 0">
             <script type="text/javascript">
                 function initMap() {
                     // map options
                     var options = {
                         zoom: 16,
-                        center: { lat: 54.687157, lng: 25.279652 }
+                        center: { lat: parseFloat(@ViewBag.Latitude), lng:parseFloat(@ViewBag.Longitude) }
                     }
                     // new map
                     var map = new google.maps.Map(document.getElementById('map'), options);
                     //marker Add
+
                     var marker = new google.maps.Marker({
-                        position: {lat: @Model.Latitude, lng: @Model.Longitude},
+                        position: { lat: parseFloat(@ViewBag.Latitude), lng: parseFloat(@ViewBag.Longitude)},
                         map: map,
                         icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
                     });
@@ -63,3 +68,23 @@
         </div>
     </div>
     </div>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#rating .sendRating").on("click", function () {
+                var button = $(this);
+                var selectId = $(this).attr("data-rating-id")
+                console.log($(this).attr("data-rating-id"));
+                bootbox.confirm("Insert your rating?", function (result) {
+                    if (result) {
+                        console.log("aa");
+                        $.post("http://localhost:59427/api/drinks/postRating", {
+                            rating: @Model.Rating,
+                            drinkId: selectId
+                        });
+                    }
+                });
+            });
+        });
+    </script>    
+    }

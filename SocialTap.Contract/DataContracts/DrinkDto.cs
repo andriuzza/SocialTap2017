@@ -6,6 +6,7 @@ namespace SocialTap.Contract.DataContracts
 {
     public class DrinkDto
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
         public int DrinkTypeId { get; set; }

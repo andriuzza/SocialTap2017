@@ -17,9 +17,6 @@ namespace SocialTap.WEB
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
-
-            //var container = IocContainer.Instance; // Or any other way to fetch your container.
-         //   config.DependencyResolver = new UnityDependencyResolver(container);
         }
     }
 }

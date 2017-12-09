@@ -14,6 +14,9 @@ namespace SocialTap.WEB.ViewModels
         public ICollection<Location> Locations { get; set; }
         public int Rating { get; set; }
 
+        public float Latitude { get; set; }
+        public float  Longitude {get;set;}
+
         public RatingViewModel()
         {
             Locations = new Collection<Location>();

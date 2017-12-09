@@ -8,17 +8,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6">
-            <div class="panel panel-success">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Local Bars</h3>
-                    <div class="pull-right">
-                    </div>
-                </div>
                 <div class="panel-body">
-                    <div>
-                        <th>@Html.ActionLink("Name", "ShowBars", new {sortOrder = ViewBag.NameSortParm, searchString = ViewBag.searchString != "" ? ViewBag.SearchString : null})</th>
-                        <th>@Html.ActionLink("Address", "ShowBars", new {sortOrder = ViewBag.AddressSortParm, searchString = ViewBag.searchString != "" ? ViewBag.SearchString : null})</th>
-                    </div>
                     <!-- <input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Insert"/>-->
                     <form>
                         <div class="form-group">
@@ -26,35 +16,38 @@
                                 <label>Find by name:</label>
                                 @Html.TextBox("SearchString")
                             </div>
-                            <input class="btn btn-success" type="submit" value="Search" />
+                            <div class="col-md-push-5">
+                                <input class="btn btn-success" type="submit" value="Search" />
+                            </div>
                         </div>
                     </form>
 
                 </div>
-                <table class="table table-hover" id="dev-table">
-                    <thead>
-                    <tr>
-                        <th>Bar Name</th>
-                        <th>Address</th>
-                        <th>Latitude</th>
-                        <th>Longitude</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach(var item in Model)
-                    {
-                        <tr>
-                            <td>@item.Name</td>
-                            <td>@item.Address</td>
-                            <td>@item.Latitude</td>
-                            <td>@item.Longitude</td>
-                        </tr>
-                    }
-                    </tbody>
-                </table>
-            </div>
-        </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>@Html.ActionLink("Name", "ShowBars", new { sortOrder = ViewBag.NameSortParm, searchString = ViewBag.searchString != "" ? ViewBag.SearchString : null })</th>
+                                <th>@Html.ActionLink("Address", "ShowBars", new { sortOrder = ViewBag.AddressSortParm, searchString = ViewBag.searchString != "" ? ViewBag.SearchString : null })</th>
+                                <th>Latitude</th>
+                                <th>Longitude</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Name</td>
+                                    <td>@item.Address</td>
+                                    <td>@item.Latitude</td>
+                                    <td>@item.Longitude</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    </div>
     </div>
 </div>
+    </div>
 
 
