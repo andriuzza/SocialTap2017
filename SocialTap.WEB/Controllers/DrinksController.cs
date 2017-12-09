@@ -90,7 +90,7 @@ namespace SocialTap.Web.Controllers
                     Id = a.Id,
                     Name = a.Name
                 };
-
+            
             var validaiton = _service.Add(new DrinkDto
             {
                 Name = viewModel.Drink.Name,
@@ -114,11 +114,17 @@ namespace SocialTap.Web.Controllers
 
         public ActionResult InsertRating(RatingViewModel RatingView)
         {
+            ViewBag.Latitude = RatingView.Latitude;
+            ViewBag.Longitude = RatingView.Longitude;
+
+
             LocationDrinkDto showUserList;
             IEnumerable<DrinkDto> drinks;
             using (ApplicationDbContext _db = new ApplicationDbContext())
             {
-                DataAccess.Models.Location Location = _db.Locations.Where(a => a.Id == RatingView.LocationId).FirstOrDefault();
+                DataAccess.Models.Location Location = _db.Locations
+                    .Where(a => a.Id == RatingView.LocationId)
+                    .FirstOrDefault();
 
                 drinks = (from a in _db.Drinks
                          join b in _db.Locations
@@ -126,7 +132,8 @@ namespace SocialTap.Web.Controllers
                          select new DrinkDto
                          {
                              Name = a.Name,
-                             Price = a.Price
+                             Price = a.Price,
+                             Id = a.Id
                          }).ToList();
 
                 showUserList = new LocationDrinkDto
@@ -140,13 +147,9 @@ namespace SocialTap.Web.Controllers
 
 
             }
-
-
             showUserList.Drinks = drinks;
             return View(showUserList);
-
-
-
         }
+
     }
 }

@@ -3,21 +3,60 @@
     ViewBag.Title = "Home Page";
 }
 
-    <div class="row">
+<div class="row">
     <img style="display: block; margin: 0 auto;" id="img_logo" alt="Logo" height="200" width="270" src="@Url.Content("~/Content/Images/pwl-logo-fp.jpg")" />
-    </div>
-<div class="col-md-offset-3">
+</div>
+<div style="  width: 100%;">
+    
     @using (Html.BeginForm("Index", "Home", FormMethod.Post))
     {
-        @Html.TextBoxFor(model => model.Rating, new { @class = "form-control HomePage", @placeholder = "Name" })
-        @Html.ValidationMessageFor(model => model.Rating)
-        <br />
-        @Html.DropDownListFor(model => model.LocationId, new SelectList(Model.Locations, "Id", "Name"), "", new { @class = "form-control HomePage", @placeholder = "Pubs" })
-        @Html.ValidationMessageFor(model => model.LocationId)
-        <br />
-        <div class="row">
-            <input type="submit" value="Submit" class="btn btn-success btn-lg" />      
+     
+            @Html.HiddenFor(x => x.Latitude, new { latitude = "Latitude" })
+            @Html.HiddenFor(x => x.Longitude, new { longitude = "Longitude" })
+        <div class="col-md-offset-4">
+            <div class="form-group">
+                <label>Rating</label>
+                @Html.TextBoxFor(model => model.Rating, new { @class = "form-control HomePage", @placeholder = "Name" })
+                @Html.ValidationMessageFor(model => model.Rating)
             </div>
-      
+            <div class="form-group">
+                <label>Pubs</label>
+                @Html.DropDownListFor(model => model.LocationId, new SelectList(Model.Locations, "Id", "Name"), "", new { @class = "form-control HomePage", @placeholder = "Pubs" })
+                @Html.ValidationMessageFor(model => model.LocationId)
+            </div>
+
+        </div>
+            <div class="row col-md-offset-4">
+                <input type="submit" value="Submit" class="btn btn-success btn-lg" />
+            </div>
+
+        if (@ViewBag.Error != "")
+        {<br/>
+            <p style="color:red; text-align: center; font-size:18px; font-weight:bold;">@ViewBag.Error</p>
+        }
     }
-</div>
+        </div>
+        <script type="text/javascript">
+                function initMap() {
+                    infoWindow = new google.maps.InfoWindow;
+                    // Try HTML5 geolocation.
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(function (position) {
+                            var pos = {
+                                lat: position.coords.latitude,
+                                lng: position.coords.longitude
+                            };
+                            
+                            $("#Latitude").val(parseFloat(position.coords.latitude));
+                            $("#Longitude").val(parseFloat(position.coords.longitude));
+                            console.log(position.coords.latitude + " " + position.coords.longitude)
+                        }, function () {
+                            handleLocationError(true, infoWindow, map.getCenter());
+                        });
+                    } else {
+                    }
+                }
+        </script>
+        <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtwsIAijZ2TTUVQ3tz2u_YuDPpiBXEF6k&callback=initMap">
+        </script>

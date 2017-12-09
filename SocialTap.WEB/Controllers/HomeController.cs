@@ -43,11 +43,20 @@ namespace SocialTap.WEB.Controllers
                     .Where(a => a.Id == ViewRating.LocationId
                     && ViewRating.Rating != 0).FirstOrDefault();
 
-                if(FoundLocation != null)
+                if(FoundLocation != null && ViewRating.Rating != 0)
                 {
                     return RedirectToAction("InsertRating", "Drinks", ViewRating);
                 }
-                return View();
+
+                ViewBag.Error = "Please insert a rating or choose a pub!";
+                ViewRating.Locations = _db.Locations.Select(a => new Contract.DataContracts.Location
+                {
+                    Name = a.Name,
+                    Id = a.Id
+                }).ToList();
+
+
+                return View(ViewRating);
             }
         }
 

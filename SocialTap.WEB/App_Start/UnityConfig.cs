@@ -62,7 +62,7 @@ namespace SocialTap.WEB
             container.RegisterType<ISystemRepository<DrinkType>, DrinkTypeRepository>();
             container.RegisterType<ISystemRepository<DrinkDto>, SystemRepository>();
             container.RegisterType<IGeneralData, GeneralData>();
-
+            container.RegisterType<ISendDataAsync, SendDataAsync>();
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
 
             // TODO: Register your type's mappings here.

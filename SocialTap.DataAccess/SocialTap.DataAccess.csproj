@@ -107,6 +107,7 @@
     <Compile Include="Repositories\DrinkTypeRepository.cs" />
     <Compile Include="Repositories\GeneralData.cs" />
     <Compile Include="Repositories\LocationsRepository.cs" />
+    <Compile Include="Repositories\SendDataAsync.cs" />
     <Compile Include="Repositories\SystemRepository.cs" />
   </ItemGroup>
   <ItemGroup>
