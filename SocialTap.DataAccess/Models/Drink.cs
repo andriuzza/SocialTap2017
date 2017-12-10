@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -26,5 +27,12 @@ namespace SocialTap.DataAccess.Models
         [Required]
         public int LocationOfDrinkId { get; set; }
         public Location LocationOfDrink { get; set; }
+
+        public IEnumerable<DrinkRating> Ratings { get; set; }
+
+        public Drink()
+        {
+            Ratings = new Collection<DrinkRating>();
+        }
     }
 }

@@ -2,40 +2,38 @@
 @{
     ViewBag.Title = "InsertRating";
 }
-
 <div class="col-md-12">
+
+        <div class="col-md-6">
+            <h2>@Model.PubName</h2>
+            <p>@Model.Address Street</p>
+            <hr />
+            <p>Your rating of a drink <bold>@Model.Rating</bold></p>
+            <table id="rating" class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Drink Name</th>
+                        <th>Price</th>
+                        <th>History</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var drink in Model.Drinks)
+                    {
+                        <tr>
+                            <td><button data-rating-id="@drink.Id" class="btn-link sendRating">Rate</button></td>
+                            <td>@drink.Name</td>
+                            <td>@drink.Price</td>
+                            <td><a href="http://localhost:59427/Drinks/Edit/@drink.Id">Check History</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+
     <div class="col-md-6">
-        <h2>@Model.PubName</h2>
-        <p>@Model.Address Street</p>
-        <hr />
-        <p>Your rating of a drink <bold>@Model.Rating</bold></p>
-
-
-        <table id="rating" class="table">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Drink Name</th>
-                    <th>Price</th>
-                    <th>History</th>
-                </tr>
-            </thead>
-            <tbody>
-        @foreach (var drink in Model.Drinks)
-        {
-                <tr>
-                    <td><button data-rating-id="@drink.Id"  class="btn-link sendRating">Rate</button></td>
-                    <td>@drink.Name</td>
-                    <td>@drink.Price</td>
-                    <td><a href="http://localhost:59427/Drinks/@drink.Id">Check History</a></td> 
-                </tr>
-        }
-            </tbody>
-        </table>
-    </div>
-
-
-    <div class="col-md-6" >
         <div id="map" style="height:70.5vh; width: 95.5vh; margin-bottom:30px; padding-top: 40px; width: 100%; padding: 0; margin: 0">
             <script type="text/javascript">
                 function initMap() {
@@ -67,7 +65,8 @@
             </script>
         </div>
     </div>
-    </div>
+</div>
+
 @section scripts{
     <script>
         $(document).ready(function () {
