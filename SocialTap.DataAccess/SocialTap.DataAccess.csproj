@@ -111,6 +111,7 @@
     <Compile Include="Notification Services\SendNotification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\DrinkTypeRepository.cs" />
+    <Compile Include="Repositories\FeedbackRepository.cs" />
     <Compile Include="Repositories\GeneralData.cs" />
     <Compile Include="Repositories\LocationsRepository.cs" />
     <Compile Include="Repositories\SendDataAsync.cs" />
