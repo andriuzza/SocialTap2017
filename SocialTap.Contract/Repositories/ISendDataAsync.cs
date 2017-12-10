@@ -11,5 +11,6 @@ namespace SocialTap.Contract.Repositories
    public interface ISendDataAsync
     {
        Task<CommonResult<DrinkRatingDto>> SendRatingAsync(DrinkRatingDto rating);
+       CommonResult<DrinkEditDto> Edit(int? id);
     }
 }

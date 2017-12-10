@@ -355,6 +355,7 @@
     <Content Include="Views\Locations\ShowBars.cshtml" />
     <Content Include="Views\Drinks\Post.cshtml" />
     <Content Include="Views\Drinks\InsertRating.cshtml" />
+    <Content Include="Views\Drinks\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

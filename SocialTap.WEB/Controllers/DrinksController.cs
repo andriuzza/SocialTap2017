@@ -14,6 +14,7 @@ using SocialTap.WEB.Models;
 using System.Web.Mvc;
 using SocialTap.WEB.ViewModels;
 using System.Data.Entity;
+using System.Web.Http;
 
 namespace SocialTap.Web.Controllers
 {
@@ -22,14 +23,16 @@ namespace SocialTap.Web.Controllers
         private readonly ApplicationDbContext _db;
         private readonly ISystemService<DrinkDto> _service;
         private readonly ISystemRepository<DrinkType> _typeService;
-
+        private readonly ISendDataAsync _data;
 
         public DrinksController(ApplicationDbContext db, ISystemService<DrinkDto> service,
-            ISystemRepository<DrinkType> typeService)
+            ISystemRepository<DrinkType> typeService,
+            ISendDataAsync data)
         {
             _db = new ApplicationDbContext();
             _service = service;
             _typeService = typeService;
+            _data = data;
         }
 
         public ActionResult Index()
@@ -80,7 +83,7 @@ namespace SocialTap.Web.Controllers
             }
         }
 
-        [HttpPost]
+        [System.Web.Mvc.HttpPost]
         public ActionResult Post(DrinkViewModel viewModel)
         {
            viewModel.DrinkTypes = _db.DrinkTypes.ToList();
@@ -125,10 +128,13 @@ namespace SocialTap.Web.Controllers
                 DataAccess.Models.Location Location = _db.Locations
                     .Where(a => a.Id == RatingView.LocationId)
                     .FirstOrDefault();
-
+                if (Location == null)
+                {
+                    ViewBag.Message = "No drinks or wrong pub entered";
+                    return View();
+                }
                 drinks = (from a in _db.Drinks
-                         join b in _db.Locations
-                            on a.LocationOfDrinkId equals b.Id
+                            where Location.Id == a.LocationOfDrinkId
                          select new DrinkDto
                          {
                              Name = a.Name,
@@ -150,6 +156,31 @@ namespace SocialTap.Web.Controllers
             showUserList.Drinks = drinks;
             return View(showUserList);
         }
+ 
+        public ActionResult Edit(int id)
+        {
+            var result = _data.Edit(id);
+            if (result.IsSuccess)
+            {
+                return View(result.Item);
+            }
 
+            return Content(result.ErrorMessage);
+        }
+
+   
+        public async Task<ActionResult>SaveEdit(DrinkEditDto drink)
+        {
+            var drinkItem = await _db.Drinks.SingleAsync(a => a.Id == drink.Id);
+            drinkItem.Name = drink.Name;
+            drinkItem.Price = drink.Price;
+           if( await _db.SaveChangesAsync() > 0)
+            {
+                ViewBag.Message = "Success!";
+            }
+            ViewBag.Message = "Error";
+          
+            return RedirectToAction("Edit", new { id= drink.Id});
+        }
     }
 }

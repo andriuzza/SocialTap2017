@@ -43,6 +43,7 @@
     <Compile Include="Common\CommonResult.cs" />
     <Compile Include="DataContracts\BarsInfo.cs" />
     <Compile Include="DataContracts\DrinkDto.cs" />
+    <Compile Include="DataContracts\DrinkEditDto.cs" />
     <Compile Include="DataContracts\DrinkRatingDto.cs" />
     <Compile Include="DataContracts\DrinksInfoDto.cs" />
     <Compile Include="DataContracts\LocationDrinkDto.cs" />

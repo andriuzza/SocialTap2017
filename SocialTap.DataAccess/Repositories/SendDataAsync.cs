@@ -8,6 +8,7 @@ using SocialTap.Contract.Common;
 using SocialTap.Contract.DataContracts;
 using SocialTap.WEB.Models;
 using SocialTap.DataAccess.Models;
+using System.Data.Entity;
 
 namespace SocialTap.DataAccess.Repositories
 {
@@ -29,7 +30,7 @@ namespace SocialTap.DataAccess.Repositories
             }
             if(rating.Rating == 0)
             {
-                return CommonResult<DrinkRatingDto>.Failure<DrinkRatingDto>("DrinK rating is 0 (not allowed)");
+                return CommonResult<DrinkRatingDto>.Failure<DrinkRatingDto>("Drink rating is 0 (not allowed)");
             }
 
             bool RatingSuccess = await SaveChanges(rating);
@@ -55,6 +56,33 @@ namespace SocialTap.DataAccess.Repositories
 
             return await _db.SaveChangesAsync() > 0;
         }
-    
+
+        public CommonResult<DrinkEditDto> Edit(int? id)
+        {
+            var drink = _db.Drinks.Where(s => s.Id == id).FirstOrDefault();
+            if(drink == null)
+            {
+                 return CommonResult<DrinkEditDto>
+               .Failure<DrinkEditDto>
+               ("No match id..");
+            }
+
+            var editDrink = new DrinkEditDto
+            {
+                Name = drink.Name,
+                Price = drink.Price,
+                Id = drink.Id,
+                Ratings = GetRatings(id)
+            };
+
+            return CommonResult<DrinkRating>.Success(editDrink);
+        }
+
+        private IQueryable<int> GetRatings(int? id)
+        {
+            return _db.DrinkRating
+                .Where(a => a.DrinkId == id)
+                .Select(a => a.Rating);
+        }
     }
 }
