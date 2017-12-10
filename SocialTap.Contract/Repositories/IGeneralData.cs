@@ -9,6 +9,7 @@ namespace SocialTap.Contract.Repositories
 {
     public interface IGeneralData
     {
+        CommonResult<IEnumerable<LocationFeedbackDto>> GetFeedbackList(int id);
         CommonResult<IEnumerable<LocationFormDto>> ShowBarsInformaiton(string sortOrder, string searchString = null);
         CommonResult<IQueryable<DrinksInfoDto>> GetDrinksList();
         IEnumerable<string> GetNotifications(string UserId);

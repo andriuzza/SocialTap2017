@@ -277,6 +277,7 @@
     <Compile Include="Controllers\Api\NotificationsController.cs" />
     <Compile Include="Controllers\DrinksController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LocationFeedbackController.cs" />
     <Compile Include="Controllers\LocationsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -287,6 +288,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\DrinkViewModel.cs" />
+    <Compile Include="ViewModels\FeedbackViewModel.cs" />
     <Compile Include="ViewModels\RatingViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -357,6 +359,9 @@
     <Content Include="Views\Drinks\InsertRating.cshtml" />
     <Content Include="Views\Drinks\Edit.cshtml" />
     <Content Include="Views\Drinks\GetAllDrinks.cshtml" />
+    <Content Include="Views\LocationFeedback\ShowFeedback.cshtml" />
+    <Content Include="Views\LocationFeedback\Post.cshtml" />
+    <Content Include="Views\LocationFeedback\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

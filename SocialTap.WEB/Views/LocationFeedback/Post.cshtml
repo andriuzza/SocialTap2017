@@ -1,0 +1,26 @@
+﻿@model SocialTap.Contract.DataContracts.LocationFeedbackDto
+@{
+    ViewBag.Title = "Post";
+}
+
+<h2>Post new feedback</h2>
+<hr />
+
+@using (Html.BeginForm("Post", "LocationFeedback", FormMethod.Post))
+{
+
+    @Html.TextBoxFor(model => model.LocationId, new { @class = "form-control", @placeholder = "LocationId" })
+    @Html.ValidationMessageFor(m => m.LocationId)
+    <br />
+    @Html.TextBoxFor(model => model.Feedback, new { @class = "form-control", @placeholder = "Feedback" })
+    @Html.ValidationMessageFor(m => m.Feedback)
+    <br />
+    @Html.TextBoxFor(model => model.User, new { @class = "form-control", @placeholder = "User" })
+    @Html.ValidationMessageFor(m => m.User)
+    <br />
+    <input type="submit" value="Submit" class="btn btn-success btn-lg" />
+}
+@if (ViewBag.Message != "")
+{
+    <p style="color:green; font-size: 20px; text-align:center">@ViewBag.Message</p>
+}

@@ -64,6 +64,25 @@ namespace SocialTap.DataAccess.Repositories
                 .Success(DrinksList);
         }
 
+        public CommonResult<IEnumerable<LocationFeedbackDto>> GetFeedbackList(int id)
+        {
+
+            IEnumerable<LocationFeedbackDto> loc = _db.LocationFeedbacks.Where(a => a.LocationId == id).Select(a =>  new LocationFeedbackDto
+            {
+                Id = a.Id,
+                LocationId = a.LocationId,
+                Feedback = a.Feedback,
+                User = a.User
+            });
+
+
+            return CommonResult<IEnumerable<LocationFeedbackDto>>
+                .Success<IEnumerable<LocationFeedbackDto>>(loc);
+            
+
+            
+        }
+
         public IEnumerable<string> GetNotifications(string UserId)
         {
 

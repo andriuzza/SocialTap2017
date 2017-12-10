@@ -38,6 +38,7 @@ namespace SocialTap.Web.Controllers
                 _repository.Add(location);
                 ModelState.Clear();
                 return View();
+
             }
             return View(location);
         }
