@@ -4,18 +4,19 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Drinks Items</h2>
+<p style="font-size:28px;">Drinks List</p>
+<hr />
 
 
 <form>
+    <p>Name</p>   
     <div class="form-group">
-        <div class="col-md-3">
-            <label>Find by name:</label>
-            @Html.TextBox("SearchString")
+       
+        <div class="col-md-3 row">
+           
+            @Html.TextBox("SearchString", null, new {@class="form-control"})
         </div>
-        <div class="col-md-push-5">
             <input class="btn btn-success" type="submit" value="Search" />
-        </div>
     </div>
 </form>
 
@@ -26,7 +27,7 @@
                 @Html.ActionLink("Name", "GetAllDrinks", new { sortOrder = @ViewData["NameSortParm"], currentFilter = @ViewData["CurrentFilter"] })
             </th>
             <th>
-                @Html.ActionLink("Price", "GetAllDrinks", new { sortOrder = @ViewData["DateSortParm"], currentFilter = @ViewData["CurrentFilter"] })
+                @Html.ActionLink("Price", "GetAllDrinks", new { sortOrder = @ViewData["PriceSortParm"], currentFilter = @ViewData["CurrentFilter"] })
             </th>
 
         </tr>
@@ -48,26 +49,25 @@
 </table>
 
 @{
-    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    var prevDisabled = Model.HasPreviousPage ? "" : "disabled";
+    var nextDisabled = Model.HasNextPage ? "" : "disabled";
     var pageLeft = Model.PageIndex - 1;
     var pageRight = Model.PageIndex + 1;
 }
+@if(prevDisabled == "disabled")
+{
+    <button class="btn btn-default disabled" >Previous</button>
+}
+else
+{
+@Html.ActionLink("Previous", "GetAllDrinks", new { sortOrder = @ViewData["CurrentSort"], page = @pageLeft, currentFilter = @ViewData["CurrentFilter"] }, new { @class = "@prevDisabled btn btn-default" })
+}
+@if (nextDisabled == "disabled")
+{
+    <button class="btn btn-default disabled">Next</button>
+}
+else {
+    @Html.ActionLink("Next", "GetAllDrinks", new { sortOrder = @ViewData["CurrentSort"], page = @pageRight, currentFilter = @ViewData["CurrentFilter"] }, new { @class = "@nextDisabled btn btn-default" })
+    }
 
-<a asp-action="Index"
-   asp-route-sortOrder="@ViewData["CurrentSort"]"
-   asp-route-page="@(Model.PageIndex - 1)"
-   asp-route-currentFilter="@ViewData["CurrentFilter"]"
-   class="btn btn-default @prevDisabled">
-    Previous
-</a>
 
-@Html.ActionLink("Previous", "GetAllDrinks", new { sortOrder = @ViewData["CurrentSort"], page = @pageLeft, currentFilter = @ViewData["CurrentFilter"] })
-@Html.ActionLink("Next", "GetAllDrinks", new { sortOrder = @ViewData["CurrentSort"], page = @pageRight, currentFilter = @ViewData["CurrentFilter"] })
-<a asp-action="Index"
-   asp-route-sortOrder="@ViewData["CurrentSort"]"
-   asp-route-page="@(Model.PageIndex + 1)"
-   asp-route-currentFilter="@ViewData["CurrentFilter"]"
-   class="btn btn-default @nextDisabled">
-    Next
-</a>

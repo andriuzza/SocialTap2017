@@ -165,7 +165,7 @@ namespace SocialTap.Web.Controllers
         {
             ViewData["CurrentSort"] = sortOrder;
             ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
 
             if (searchString != null)
             {
