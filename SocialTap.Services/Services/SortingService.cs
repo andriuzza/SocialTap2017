@@ -33,9 +33,8 @@ namespace SocialTap.Services.Services
                     break;
             }
             return info;
-
         }
-         public IEnumerable<LocationFormDto> Mapping(DataTable table, string searchString = "")
+        public IEnumerable<LocationFormDto> Mapping(DataTable table, string searchString = "")
         {
             foreach (DataRow row in table.Rows)
             {

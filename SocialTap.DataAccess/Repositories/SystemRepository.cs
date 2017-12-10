@@ -7,6 +7,7 @@ using SocialTap.Contract.DataContracts;
 using SocialTap.Contract.Repositories;
 using SocialTap.DataAccess.Models;
 using SocialTap.WEB.Models;
+using PagedList;
 
 namespace SocialTap.DataAccess.Repositories
 {
@@ -29,5 +30,6 @@ namespace SocialTap.DataAccess.Repositories
             });
             _db.SaveChangesAsync();
         }
+
     }
 }

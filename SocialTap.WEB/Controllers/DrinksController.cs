@@ -15,6 +15,7 @@ using System.Web.Mvc;
 using SocialTap.WEB.ViewModels;
 using System.Data.Entity;
 using System.Web.Http;
+using SocialTap.Services.Services;
 
 namespace SocialTap.Web.Controllers
 {
@@ -156,7 +157,39 @@ namespace SocialTap.Web.Controllers
             showUserList.Drinks = drinks;
             return View(showUserList);
         }
- 
+
+        public async Task<ActionResult> GetAllDrinks(string sortOrder,
+         string currentFilter,
+            string searchString,
+                 int? page)
+        {
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+            var drinks = from s in _db.Drinks
+                         select s;
+
+            var result = PagedService<DrinksInfoDto>.GetDrinks(sortOrder, drinks);
+
+
+
+            int pageSize = 3;
+            return View(await PagedService<Drink>.CreateAsync(result.AsNoTracking(), page ?? 1, pageSize));
+
+        }
+
         public ActionResult Edit(int id)
         {
             var result = _data.Edit(id);
@@ -167,8 +200,7 @@ namespace SocialTap.Web.Controllers
 
             return Content(result.ErrorMessage);
         }
-
-   
+    
         public async Task<ActionResult>SaveEdit(DrinkEditDto drink)
         {
             var drinkItem = await _db.Drinks.SingleAsync(a => a.Id == drink.Id);
