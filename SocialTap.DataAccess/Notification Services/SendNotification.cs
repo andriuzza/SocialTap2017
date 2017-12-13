@@ -32,14 +32,41 @@ namespace SocialTap.Services.Notification_Services
                 db.SaveChanges();
 
                 var users = db.Users.ToList();
+
+
+
                 foreach (var user in users)
                 {
-                    NotificationUser ns = new NotificationUser()
+                    var number = db.NotificationUsers
+                        .Where(a => a.UserAccountId == user.Id)
+                        .Count();
+                    /*Checks if notifications for one user isn't more or equal to 5 */
+                    /*if yes - deletes them until notification number is 4 */
+                    /*using >= 'cause in the scenario where request happens almost in the same time it is possible
+                     * to have more 5 notifications per user*/
+                    if (number >= 5) 
                     {
-                        UserAccountId = user.Id,
-                        NotificationId = notification.Id
-                    };
-                    db.NotificationUsers.Add(ns);
+                        while (db.NotificationUsers.Where(u => u.UserAccountId == user.Id).Count() != 4)
+                        {
+                            var notifi = db.NotificationUsers
+                                .Where(u=>u.UserAccountId == user.Id).ToList()
+                                .Last();
+
+                            db.NotificationUsers.Remove(notifi);
+                            db.SaveChanges();
+                        }
+                      
+
+
+                        NotificationUser ns = new NotificationUser()
+                        {
+                            UserAccountId = user.Id,
+                            NotificationId = notification.Id
+                        };
+                        db.NotificationUsers.Add(ns);
+                    }
+                   
+                   
 
                 }
                 db.SaveChanges();
@@ -49,7 +76,7 @@ namespace SocialTap.Services.Notification_Services
         public NotificationEventArgs CreateNotification(string message)
         {
             Notification notification = new Notification();
-            notification.NotificationText = message; /*not yet sure if it is needed here... */
+            notification.NotificationText = message; 
 
             return new NotificationEventArgs()
             {

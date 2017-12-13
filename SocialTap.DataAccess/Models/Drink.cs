@@ -17,6 +17,7 @@ namespace SocialTap.DataAccess.Models
         public string Name { get; set; }
 
         [Required]
+        [Range(0.1, 1000.0, ErrorMessage = "The price must higher than zeros")]
         public decimal Price { get; set; }
 
     

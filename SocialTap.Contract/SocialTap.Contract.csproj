@@ -38,6 +38,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -56,6 +57,7 @@
     <Compile Include="DataContracts\LocationDto.cs" />
     <Compile Include="DataContracts\LocationFeedbackDto.cs" />
     <Compile Include="DataContracts\LocationFormDto.cs" />
+    <Compile Include="DataContracts\NotificationDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IGeneralData.cs" />
     <Compile Include="Repositories\ISendDataAsync.cs" />
