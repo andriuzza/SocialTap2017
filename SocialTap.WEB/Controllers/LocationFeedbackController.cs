@@ -1,5 +1,8 @@
 ﻿using SocialTap.Contract.DataContracts;
 using SocialTap.Contract.Repositories;
+using SocialTap.DataAccess.Models.Feedbacks;
+using SocialTap.WEB.Models;
+using SocialTap.WEB.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,19 +15,24 @@ namespace SocialTap.WEB.Controllers
     {
         private readonly ISystemRepository<LocationFeedbackDto> _repository;
         private readonly IGeneralData _general;
+        private readonly ApplicationDbContext _db;
 
-        public LocationFeedbackController(ISystemRepository<LocationFeedbackDto> repository,IGeneralData general)
+        public LocationFeedbackController(ApplicationDbContext db, ISystemRepository<LocationFeedbackDto> repository,IGeneralData general)
         {
+            _db = db;
             _repository = repository;
             _general = general;
         }
 
         public ActionResult Index()
         {
-            var b = _db.DrinkTypes;
-            var viewModel = new DrinkViewModel
+            //var b = _db.Locations;
+            var viewModel = new FeedbackViewModel
             {
-                DrinkTypes = _db.DrinkTypes.ToList(),
+                Locations = _db.Locations.ToList(),
+                LocationFeedback = new LocationFeedback()
+
+                /*DrinkTypes = _db.DrinkTypes.ToList(),
                 Locations = from a in _db.Locations
                             select new Contract.DataContracts.Location
                             {
@@ -33,6 +41,7 @@ namespace SocialTap.WEB.Controllers
                             },
 
                 Drink = new Drink()
+                */
             };
             try
             {
@@ -44,10 +53,12 @@ namespace SocialTap.WEB.Controllers
             }
             return View();
         }
+        
+        
 
-        public ActionResult ShowFeedback()
+        public ActionResult ShowFeedback(int id)
         {
-            var result = _general.GetFeedbackList(2);
+            var result = _general.GetFeedbackList(id);
             if (result.IsSuccess)
             {
                 return View(result.Item);
@@ -72,7 +83,9 @@ namespace SocialTap.WEB.Controllers
             {
                 _repository.Add(locationFeedback);
                 ModelState.Clear();
-                return View();
+                //return RedirectToAction("showFeedback", "locationFeedback", new { id = locationFeedback.LocationId });
+
+                return RedirectToAction("showFeedback", "locationFeedback", new { id = 1 });
 
             }
             return View(locationFeedback);
