@@ -57,6 +57,7 @@
     <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.SqlServer.Compact.4.0.8876.1\lib\net40\System.Data.SqlServerCe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -94,6 +95,10 @@
     <Compile Include="Migrations\201712081239500_AddRating.cs" />
     <Compile Include="Migrations\201712081239500_AddRating.Designer.cs">
       <DependentUpon>201712081239500_AddRating.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712130858252_RequiredPropLocation.cs" />
+    <Compile Include="Migrations\201712130858252_RequiredPropLocation.Designer.cs">
+      <DependentUpon>201712130858252_RequiredPropLocation.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Drink.cs" />
@@ -148,6 +153,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712081239500_AddRating.resx">
       <DependentUpon>201712081239500_AddRating.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712130858252_RequiredPropLocation.resx">
+      <DependentUpon>201712130858252_RequiredPropLocation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

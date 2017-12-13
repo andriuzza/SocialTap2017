@@ -24,5 +24,15 @@ namespace SocialTap.WEB.Controllers.Api
 
            return Ok(_data.GetNotifications(UserId));
         }
+
+        [HttpPost]
+        public IHttpActionResult PostSeen()
+        {
+            var UserId = User.Identity.GetUserId();
+            _data.PostSeen(UserId);
+
+            return Ok();
+
+        }
     }
 }

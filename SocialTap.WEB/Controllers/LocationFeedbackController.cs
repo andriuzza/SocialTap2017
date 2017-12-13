@@ -1,5 +1,8 @@
 ﻿using SocialTap.Contract.DataContracts;
 using SocialTap.Contract.Repositories;
+using SocialTap.DataAccess.Models;
+using SocialTap.Web.ViewModels;
+using SocialTap.WEB.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,37 +15,15 @@ namespace SocialTap.WEB.Controllers
     {
         private readonly ISystemRepository<LocationFeedbackDto> _repository;
         private readonly IGeneralData _general;
+        private readonly ApplicationDbContext _db;
 
-        public LocationFeedbackController(ISystemRepository<LocationFeedbackDto> repository,IGeneralData general)
+        public LocationFeedbackController(ISystemRepository<LocationFeedbackDto> repository,
+            IGeneralData general,
+            ApplicationDbContext db)
         {
             _repository = repository;
             _general = general;
-        }
-
-        public ActionResult Index()
-        {
-            var b = _db.DrinkTypes;
-            var viewModel = new DrinkViewModel
-            {
-                DrinkTypes = _db.DrinkTypes.ToList(),
-                Locations = from a in _db.Locations
-                            select new Contract.DataContracts.Location
-                            {
-                                Id = a.Id,
-                                Name = a.Name
-                            },
-
-                Drink = new Drink()
-            };
-            try
-            {
-                return View(viewModel);
-            }
-            catch (NullReferenceException ex)
-            {
-                return Content("Null exception" + ex.Data);
-            }
-            return View();
+            _db = db;
         }
 
         public ActionResult ShowFeedback()

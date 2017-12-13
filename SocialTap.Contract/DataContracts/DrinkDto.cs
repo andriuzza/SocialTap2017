@@ -11,5 +11,8 @@ namespace SocialTap.Contract.DataContracts
         public decimal Price { get; set; }
         public int DrinkTypeId { get; set; }
         public int LocationOfDrinkId { get; set; }
+
+
+        public double? RatingAverage { get; set; }
     }
 }

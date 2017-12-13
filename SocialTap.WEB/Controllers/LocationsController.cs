@@ -33,13 +33,16 @@ namespace SocialTap.Web.Controllers
         [HttpPost]
         public ActionResult Post(LocationFormDto location)
         {
+           
             if (ModelState.IsValid)
             {
                 _repository.Add(location);
                 ModelState.Clear();
+                ViewBag.Message = "Success!";
                 return View();
 
             }
+
             return View(location);
         }
 
