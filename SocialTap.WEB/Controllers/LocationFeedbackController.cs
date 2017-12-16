@@ -23,9 +23,17 @@ namespace SocialTap.WEB.Controllers
             _general = general;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string place)
         {
             var b = _db.LocationFeedbacks;
+
+            var vieta = _db.Locations.Where(a => a.Name.Equals(place)).FirstOrDefault();
+
+            int placeId = vieta.Id;
+
+            return RedirectToAction("ShowFeedback", new { id = placeId });
+            /*
+
             var viewModel = new FeedbackViewModel
             {
                 location = _db.Locations
@@ -41,11 +49,12 @@ namespace SocialTap.WEB.Controllers
                 return Content("Null exception" + ex.Data);
             }
             return View();
+            */
         }
 
-        public ActionResult ShowFeedback()
+        public ActionResult ShowFeedback(int id)
         {
-            var result = _general.GetFeedbackList(2);
+            var result = _general.GetFeedbackList(id);
             if (result.IsSuccess)
             {
                 return View(result.Item);
