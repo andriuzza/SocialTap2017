@@ -109,13 +109,13 @@ namespace SocialTap.DataAccess.Repositories
             {
                 return CommonResult<IEnumerable<LocationFormDto>>
                     .Failure<IEnumerable<LocationFormDto>>
-                    ("The DB does not contain ane location yet...");
+                    ("The DB does not contain any location yet...");
             }
 
             var adapter = new SqlDataAdapter();
             var con = new SqlConnection();
             con.ConnectionString = ConnectionString;
-            var select = new SqlCommand("SELECT Name, Address, Latitude, Longitude" +
+            var select = new SqlCommand("SELECT Id, Name, Address, Latitude, Longitude" +
                                                " FROM Locations", con);
 
         //    select.Parameters.AddWithValue("@Name", searchString);

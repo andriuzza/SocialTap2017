@@ -51,10 +51,16 @@ namespace SocialTap.WEB.Controllers
             */
         }
 
-        public ActionResult ShowFeedback(int id, string place)
+        public ActionResult ShowFeedback(int id)
         {
-            var result = _general.GetFeedbackList(id);
-            ViewBag.Place = place;
+            var b = _db.LocationFeedbacks;
+
+            var vieta = _db.Locations.Where(a => a.Id.Equals(id)).FirstOrDefault();
+            ViewBag.Place = vieta.Name;
+            int placeId = vieta.Id;
+            ViewBag.PlaceId = placeId;
+            var result = _general.GetFeedbackList(placeId);
+            ViewBag.Place = vieta.Name;
             if (result.IsSuccess)
             {
                 return View(result.Item);
@@ -79,7 +85,7 @@ namespace SocialTap.WEB.Controllers
             {
                 _repository.Add(locationFeedback);
                 ModelState.Clear();
-                return View();
+                return RedirectToAction("ShowFeedback", new { id = locationFeedback.LocationId});
 
             }
             return View(locationFeedback);

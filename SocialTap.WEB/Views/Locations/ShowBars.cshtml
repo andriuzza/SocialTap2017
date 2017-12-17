@@ -37,8 +37,8 @@
                             @foreach (var item in Model)
                             {
                                 <tr>
-                                    <td>@Html.ActionLink(item.Name, "showFeedback", "locationfeedback", new { place = item.Name}, null)</td>
-                                    <td>@item.Name</td>
+                                    <td>@item.Id</td>
+                                    <td>@Html.ActionLink(item.Name, "showFeedback", "locationfeedback", new { id = item.Id}, null)</td>
                                     <td>@item.Address</td>
                                     <td>@item.Latitude</td>
                                     <td>@item.Longitude</td>
