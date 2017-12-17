@@ -3,8 +3,12 @@
 @{
     ViewBag.Title = "ShowFeedback";
 }
+    @{ 
+        var name = Model.FirstOrDefault();
+    }
+    <h2>Show "<b>@ViewBag.Place</b>" Feedback</h2>
+    
 
-    <h2>Show Feedback</h2>
     <hr />
     <div class="container">
         <div class="row">
@@ -13,9 +17,8 @@
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
+                           
                             <tr>
-                                <th>Id</th>
-                                <th>Location Id</th>
                                 <th>Feedback</th>
                                 <th>User</th>
                             </tr>
@@ -24,8 +27,6 @@
                             @foreach (var item in Model)
                             {
                                 <tr>
-                                    <td>@item.Id</td>
-                                    <td>@item.LocationId</td>
                                     <td>@item.Feedback</td>
                                     <td>@item.User</td>
                                 </tr>

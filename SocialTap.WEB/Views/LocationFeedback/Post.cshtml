@@ -1,4 +1,4 @@
-﻿@model SocialTap.WEB.ViewModels.FeedbackViewModel
+﻿@model SocialTap.Contract.DataContracts.LocationFeedbackDto
 @{
     ViewBag.Title = "Post";
 }
@@ -9,11 +9,11 @@
 @using (Html.BeginForm("Post", "LocationFeedback", FormMethod.Post))
 {
 
-    @Html.TextBoxFor(model => model.Location.Id, new { @class = "form-control", @placeholder = "LocationId" })
+ @*   @Html.TextBoxFor(model => model.Location.Id, new { @class = "form-control", @placeholder = "LocationId" })
     @Html.ValidationMessageFor(m => m.Location.Id)
+     *@
 
-    /*@Html.DropDownListFor(model => model.LocationId, new SelectList(Model., "Id", "Name"), "", new { @class = "form-control", @placeholder = "Type" })
-    @Html.ValidationMessageFor(model => model.DrinkTypeId)
+    <input type="hidden" value=@ViewBag.id name="LocationId" />
     <br />
     @Html.TextBoxFor(model => model.Feedback, new { @class = "form-control", @placeholder = "Feedback" })
     @Html.ValidationMessageFor(m => m.Feedback)
@@ -21,7 +21,7 @@
     @Html.TextBoxFor(model => model.User, new { @class = "form-control", @placeholder = "User" })
     @Html.ValidationMessageFor(m => m.User)
     <br />
-    */
+    
     <input type="submit" value="Submit" class="btn btn-success btn-lg" />
 }
 @if (ViewBag.Message != "")
