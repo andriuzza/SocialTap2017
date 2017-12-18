@@ -15,13 +15,9 @@ namespace SocialTap.WEB.Controllers
         private readonly ApplicationDbContext _db;
         private readonly ISystemRepository<LocationFeedbackDto> _repository;
         private readonly IGeneralData _general;
-        private readonly ApplicationDbContext _db;
+      
         
         public LocationFeedbackController(ApplicationDbContext db, ISystemRepository<LocationFeedbackDto> repository,IGeneralData general)
-        public LocationFeedbackController(ISystemRepository<LocationFeedbackDto> repository,
-            IGeneralData general,
-            ApplicationDbContext db)
-
         {
             _db = new ApplicationDbContext();
             _repository = repository;
@@ -35,25 +31,6 @@ namespace SocialTap.WEB.Controllers
             ViewBag.Place = vieta.Name;
             int placeId = vieta.Id;
             return RedirectToAction("ShowFeedback", new { id = placeId, place = ViewBag.Place });
-            /*
-
-            var viewModel = new FeedbackViewModel
-            {
-                location = _db.Locations
-                .ToList(),
-                
-            };
-            try
-            {
-                return View(viewModel);
-            }
-            catch (NullReferenceException ex)
-            {
-                return Content("Null exception" + ex.Data);
-            }
-            return View();
-            */
-
         }
 
         public ActionResult ShowFeedback(int id)
