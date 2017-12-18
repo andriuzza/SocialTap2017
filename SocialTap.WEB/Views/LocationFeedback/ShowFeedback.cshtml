@@ -3,19 +3,24 @@
 @{
     ViewBag.Title = "ShowFeedback";
 }
+    @{ 
+        var name = Model.FirstOrDefault();
+    }
+    <h2>Show "<b>@ViewBag.Place</b>" Feedback</h2>
+    
 
-    <h2>Show Feedback</h2>
     <hr />
     <div class="container">
         <div class="row">
             <div class="col-md-6">
                 
                 <div class="table-responsive">
+                    <button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("post", "locationfeedback", new { id = ViewBag.PlaceId})'">Post Feedback</button>
+                    <button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("showbars", "locations")'">Bar List</button>
                     <table class="table">
                         <thead>
+                           
                             <tr>
-                                <th>Id</th>
-                                <th>Location Id</th>
                                 <th>Feedback</th>
                                 <th>User</th>
                             </tr>
@@ -24,8 +29,6 @@
                             @foreach (var item in Model)
                             {
                                 <tr>
-                                    <td>@item.Id</td>
-                                    <td>@item.LocationId</td>
                                     <td>@item.Feedback</td>
                                     <td>@item.User</td>
                                 </tr>

@@ -1,25 +1,19 @@
-﻿@model SocialTap.Web.ViewModels.DrinkViewModel
+﻿@model SocialTap.WEB.ViewModels.FeedbackViewModel
 
 <h2>Upload a new drink</h2>
 <hr />
 
-@using (Html.BeginForm("Post", "Drinks", FormMethod.Post))
+@using (Html.BeginForm("Post", "LocationFeedback", FormMethod.Post))
 {
 
 
 
-    @Html.TextBoxFor(model => model.Drink.Name, new { @class = "form-control", @placeholder = "Name" })
-    @Html.ValidationMessageFor(model => model.Drink.Name)
-    <br />
-        @Html.DropDownListFor(model => model.DrinkTypeId, new SelectList(Model.DrinkTypes, "Id", "Name"), "", new { @class = "form-control", @placeholder = "Type" })
-        @Html.ValidationMessageFor(model => model.DrinkTypeId)
+        @Html.DropDownListFor(model => model.location, new SelectList(Model.location, "Id", "Name"), "", new { @class = "form-control", @placeholder = "Type" })
+        @Html.ValidationMessageFor(model => model.location
+   )
         <br />
-        @Html.TextBoxFor(model => model.Drink.Price, new { @class = "form-control", @placeholder = "Price" })
-        @Html.ValidationMessageFor(model => model.Drink.Price)
-        <br />
-        @Html.DropDownListFor(model => model.LocationId, new SelectList(Model.Locations, "Id", "Name"), "", new { @class = "form-control", @placeholder = "Type" })
-        @Html.ValidationMessageFor(model => model.LocationId)
+        
         <br />
         <input type="submit" value="Submit" class="btn btn-success btn-lg" />
-        <button class="btn btn-danger btn-lg" onclick="@Url.Action("Index", "Home")">Cancel</button>
+        <button class="btn btn-danger btn-lg" onclick="@Url.Action("ShowFeedback", "LocationFeedback", 1)">Cancel</button>
 }

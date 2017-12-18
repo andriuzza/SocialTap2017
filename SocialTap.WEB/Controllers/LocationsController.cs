@@ -61,7 +61,7 @@ namespace SocialTap.Web.Controllers
             }
 
             var validatedData = _general.ShowBarsInformaiton(sortOrder, searchString);
-
+            
             if (validatedData.IsSuccess)
             {
                 ViewBag.Message = "Success";

@@ -26,6 +26,7 @@ namespace SocialTap.DataAccess.Repositories
         {
             _db.Locations.Add(new Models.Location()
             {
+                Id = local.Id,
                 Name = local.Name,
                 Latitude = local.Latitude,
                 Longitude = local.Longitude,

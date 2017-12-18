@@ -43,6 +43,7 @@ namespace SocialTap.Services.Services
                 {
                     info.Add(new LocationFormDto()
                     {
+                        Id = int.Parse(row["Id"].ToString()),
                         Name = row["Name"].ToString(),
                         Address = row["Address"].ToString(),
                         Longitude = float.Parse(row["Longitude"].ToString()),

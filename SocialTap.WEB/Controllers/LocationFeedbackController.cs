@@ -1,8 +1,7 @@
 ﻿using SocialTap.Contract.DataContracts;
 using SocialTap.Contract.Repositories;
-using SocialTap.DataAccess.Models;
-using SocialTap.Web.ViewModels;
 using SocialTap.WEB.Models;
+using SocialTap.WEB.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,22 +12,60 @@ namespace SocialTap.WEB.Controllers
 {
     public class LocationFeedbackController : Controller
     {
+        private readonly ApplicationDbContext _db;
         private readonly ISystemRepository<LocationFeedbackDto> _repository;
         private readonly IGeneralData _general;
         private readonly ApplicationDbContext _db;
-
+        
+        public LocationFeedbackController(ApplicationDbContext db, ISystemRepository<LocationFeedbackDto> repository,IGeneralData general)
         public LocationFeedbackController(ISystemRepository<LocationFeedbackDto> repository,
             IGeneralData general,
             ApplicationDbContext db)
+
         {
+            _db = new ApplicationDbContext();
             _repository = repository;
             _general = general;
-            _db = db;
+
         }
 
-        public ActionResult ShowFeedback()
+        public ActionResult Index(string place)
         {
-            var result = _general.GetFeedbackList(2);
+            var vieta = _db.Locations.Where(a => a.Name.Equals(place)).FirstOrDefault();
+            ViewBag.Place = vieta.Name;
+            int placeId = vieta.Id;
+            return RedirectToAction("ShowFeedback", new { id = placeId, place = ViewBag.Place });
+            /*
+
+            var viewModel = new FeedbackViewModel
+            {
+                location = _db.Locations
+                .ToList(),
+                
+            };
+            try
+            {
+                return View(viewModel);
+            }
+            catch (NullReferenceException ex)
+            {
+                return Content("Null exception" + ex.Data);
+            }
+            return View();
+            */
+
+        }
+
+        public ActionResult ShowFeedback(int id)
+        {
+            var b = _db.LocationFeedbacks;
+
+            var vieta = _db.Locations.Where(a => a.Id.Equals(id)).FirstOrDefault();
+            ViewBag.Place = vieta.Name;
+            int placeId = vieta.Id;
+            ViewBag.PlaceId = placeId;
+            var result = _general.GetFeedbackList(placeId);
+            ViewBag.Place = vieta.Name;
             if (result.IsSuccess)
             {
                 return View(result.Item);
@@ -40,9 +77,9 @@ namespace SocialTap.WEB.Controllers
 
         }
 
-        public ActionResult Post()
+        public ActionResult Post(int id)
         {
-
+            ViewBag.id = id;
             return View();
         }
 
@@ -53,7 +90,7 @@ namespace SocialTap.WEB.Controllers
             {
                 _repository.Add(locationFeedback);
                 ModelState.Clear();
-                return View();
+                return RedirectToAction("ShowFeedback", new { id = locationFeedback.LocationId});
 
             }
             return View(locationFeedback);
