@@ -5,7 +5,7 @@
 
 <div class="col-md-12">
     <div class="col-md-6">
-        <p>Edit</p>
+        <p style="font-size:20px;">Edit</p>
 
         @using (Html.BeginForm("SaveEdit", "Drinks", FormMethod.Post))
         {
@@ -31,7 +31,7 @@
        var masyvas = [];
 
         @foreach(var drink in Model.Ratings)
-        {
+        {                                                               
              @:masyvas.push(@drink);
         }
 
@@ -39,7 +39,7 @@
 
             var diagram = [];
              for (var i = 0; i < masyvas.length; i++) {
-                diagram.push({ y: masyvas[i] });
+                 diagram.push({ label: i+1, y: masyvas[i] });
         }
 
                 var options = {
@@ -47,6 +47,12 @@
                 animationEnabled: true,
                 title: {
                         text: "Rating diagram of @Model.Name"
+                },
+                axisY: {
+                    title: "Users Ratings"
+                },
+                axisX: {
+                    title: "Count"
                 },
                 data: [
                                 {

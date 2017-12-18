@@ -82,27 +82,38 @@ namespace SocialTap.DataAccess.Repositories
 
             
         }
-
-        public IEnumerable<string> GetNotifications(string UserId)
+        /*---------------*/
+        public IEnumerable<NotificationDto> GetNotifications(string UserId)
         {
 
             var result = from noti in _db.NotificationUsers
-                            join a in _db.Notifications
-                               on noti.NotificationId equals a.Id
-                             where UserId == noti.UserAccountId
-                                 where noti.IsRead == false
-                                   select a.NotificationText;
+                         join a in _db.Notifications
+                            on noti.NotificationId equals a.Id
+                         where UserId == noti.UserAccountId
+                         select new NotificationDto
+                         { Notification = a.NotificationText, IsRead = noti.IsRead };
             if (result.Any())
             {
                 return result;
             }
-            IList<string> noInformation = new List<string>
+            IList<NotificationDto> noInformation = new List<NotificationDto>
             {
-              "No notifications has been added for a while"
+              new NotificationDto { Notification = "No notifications has been added for a while"}
             };
             return noInformation;
         }
 
+        public void PostSeen (string UserId)
+        {
+            var Notifications = from a in _db.NotificationUsers
+                                where a.IsRead == false
+                                select a;
+            foreach (var noti in Notifications.ToList()){
+                noti.IsRead = true;
+            }
+            _db.SaveChangesAsync();
+        }
+        /*----------------------*/
         public CommonResult<IEnumerable<LocationFormDto>> ShowBarsInformaiton(string sortOrder, string searchString = null)
         {
             if (_db.Locations.Count() == 0)

@@ -9,6 +9,7 @@ using SocialTap.DataAccess.Models;
 using SocialTap.WEB.Models;
 using SocialTap.DataAccess.Notification_Services.IServices_of_Notifications;
 using SocialTap.Services.Notification_Services;
+using System.Web.ModelBinding;
 
 namespace SocialTap.DataAccess.Repositories
 {
@@ -31,12 +32,10 @@ namespace SocialTap.DataAccess.Repositories
                 Longitude = local.Longitude,
                 Address = local.Address
             });
-            _db.SaveChanges();
-
+           
+             _db.SaveChanges();
             NewLocationInserted insert = new NewLocationInserted(local);
             NotificationHandling handler = new NotificationHandling(new SendNotification(), insert.Message);
-           
-
         }
     }
     public class NewLocationInserted

@@ -13,10 +13,15 @@ namespace SocialTap.DataAccess.Models
         [Key]
         [Required]
         public int Id { get; set; }
+
         [MaxLength(50)]
+        [Required]
         public string Name { get; set; }
+
         [MaxLength(50)]
+        [Required]
         public string Address { get; set; }
+        
         public float Latitude { get; set; }
         public float Longitude { get; set; }
 

@@ -15,6 +15,7 @@
                         <th>#</th>
                         <th>Drink Name</th>
                         <th>Price</th>
+                        <th>Rating</th>
                         <th>History</th>
                     </tr>
                 </thead>
@@ -25,6 +26,14 @@
                             <td><button data-rating-id="@drink.Id" class="btn-link sendRating">Rate</button></td>
                             <td>@drink.Name</td>
                             <td>@drink.Price</td>
+                            @if(drink.RatingAverage == null)
+                            {
+                                <td>No Rating</td>
+                            }
+                            else
+                            {
+                                <td>@string.Format("{0:0.00}", drink.RatingAverage)</td>
+                            }
                             <td><a href="http://localhost:59427/Drinks/Edit/@drink.Id">Check History</a></td>
                         </tr>
                     }

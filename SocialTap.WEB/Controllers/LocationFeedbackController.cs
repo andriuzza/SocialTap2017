@@ -15,18 +15,22 @@ namespace SocialTap.WEB.Controllers
         private readonly ApplicationDbContext _db;
         private readonly ISystemRepository<LocationFeedbackDto> _repository;
         private readonly IGeneralData _general;
-
+        private readonly ApplicationDbContext _db;
+        
         public LocationFeedbackController(ApplicationDbContext db, ISystemRepository<LocationFeedbackDto> repository,IGeneralData general)
+        public LocationFeedbackController(ISystemRepository<LocationFeedbackDto> repository,
+            IGeneralData general,
+            ApplicationDbContext db)
+
         {
             _db = new ApplicationDbContext();
             _repository = repository;
             _general = general;
+
         }
 
         public ActionResult Index(string place)
         {
-            var b = _db.LocationFeedbacks;
-
             var vieta = _db.Locations.Where(a => a.Name.Equals(place)).FirstOrDefault();
             ViewBag.Place = vieta.Name;
             int placeId = vieta.Id;
@@ -49,6 +53,7 @@ namespace SocialTap.WEB.Controllers
             }
             return View();
             */
+
         }
 
         public ActionResult ShowFeedback(int id)

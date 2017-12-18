@@ -16,6 +16,7 @@ using SocialTap.WEB.ViewModels;
 using System.Data.Entity;
 using System.Web.Http;
 using SocialTap.Services.Services;
+using System.Web;
 
 namespace SocialTap.Web.Controllers
 {
@@ -101,8 +102,6 @@ namespace SocialTap.Web.Controllers
                 Price = viewModel.Drink.Price,
                 LocationOfDrinkId = viewModel.LocationId,
                 DrinkTypeId = viewModel.DrinkTypeId
-
-                
             });
 
             if (validaiton.IsSuccess)
@@ -135,12 +134,15 @@ namespace SocialTap.Web.Controllers
                     return View();
                 }
                 drinks = (from a in _db.Drinks
-                            where Location.Id == a.LocationOfDrinkId
-                         select new DrinkDto
-                         {
-                             Name = a.Name,
-                             Price = a.Price,
-                             Id = a.Id
+                          where Location.Id == a.LocationOfDrinkId
+                          select new DrinkDto
+                          {
+                              Name = a.Name,
+                              Price = a.Price,
+                              Id = a.Id,
+                              RatingAverage = _db.DrinkRating
+                              .Where(b => b.DrinkId == a.Id)
+                              .Average(r => r.Rating)
                          }).ToList();
 
                 showUserList = new LocationDrinkDto

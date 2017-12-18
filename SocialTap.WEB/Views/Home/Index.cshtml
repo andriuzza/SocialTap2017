@@ -8,26 +8,32 @@
 </div>
 <div style="  width: 100%;">
     
-    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post,
+                            new { enctype = "multipart/form-data" }))
     {
-     
+
             @Html.HiddenFor(x => x.Latitude, new { latitude = "Latitude" })
             @Html.HiddenFor(x => x.Longitude, new { longitude = "Longitude" })
         <div class="col-md-offset-4">
+            <label for="file">Upload Image:</label>
             <div class="form-group">
-                <label>Rating</label>
-                @Html.TextBoxFor(model => model.Rating, new { @class = "form-control HomePage", @placeholder = "Name" })
-                @Html.ValidationMessageFor(model => model.Rating)
+                <span class="btn btn-default btn-file" style="width:380px;">Select
+                    <input class="btn btn-default" type="file" name="file" id="file" style="width: 100%;" />
+                </span>
+                @if(ViewBag.NoFile != null)
+                {
+                    <p class="text-danger">@ViewBag.NoFile</p>
+                }
             </div>
             <div class="form-group">
                 <label>Pubs</label>
                 @Html.DropDownListFor(model => model.LocationId, new SelectList(Model.Locations, "Id", "Name"), "", new { @class = "form-control HomePage", @placeholder = "Pubs" })
-                @Html.ValidationMessageFor(model => model.LocationId)
+                @Html.ValidationMessageFor(model => model.LocationId, null, new {@class="text-danger" })
             </div>
 
         </div>
             <div class="row col-md-offset-4">
-                <input type="submit" value="Submit" class="btn btn-success btn-lg" />
+                <input id="updateButton" type="submit" value="Submit" class="btn btn-success btn-lg disabled" />
             </div>
 
         if (@ViewBag.Error != "")
@@ -37,25 +43,39 @@
     }
         </div>
         <script type="text/javascript">
+            if (sessionStorage.getItem("latitude") === null && sessionStorage.getItem("longitude") === null) {
+                console.log("axxx");
                 function initMap() {
                     infoWindow = new google.maps.InfoWindow;
-                    // Try HTML5 geolocation.
                     if (navigator.geolocation) {
                         navigator.geolocation.getCurrentPosition(function (position) {
                             var pos = {
                                 lat: position.coords.latitude,
                                 lng: position.coords.longitude
                             };
-                            
-                            $("#Latitude").val(parseFloat(position.coords.latitude));
-                            $("#Longitude").val(parseFloat(position.coords.longitude));
-                            console.log(position.coords.latitude + " " + position.coords.longitude)
-                        }, function () {
-                            handleLocationError(true, infoWindow, map.getCenter());
+                             console.log("axxx")
+                             document.getElementById("Latitude").value = (parseFloat(position.coords.latitude));
+                             document.getElementById("Longitude").value = (parseFloat(position.coords.longitude));
+                             console.log("axxx")
+                             document.getElementById("updateButton").classList.remove("disabled");
+                            sessionStorage.setItem("latitude", parseFloat(position.coords.latitude));
+                            sessionStorage.setItem("longitude", parseFloat(position.coords.longitude));
+
                         });
-                    } else {
-                    }
-                }
+                    } 
+                } 
+            }   
+            else {
+                document.getElementById("updateButton").classList.remove("disabled");
+
+                var lat = parseFloat(sessionStorage.getItem("latitude"));
+                var lng = parseFloat(sessionStorage.getItem("longitude"));
+                console.log(lat);
+                document.getElementById("Latitude").value = lat;
+                console.log(lat);
+                document.getElementById("Longitude").value = lng;
+                console.log(lat);
+            }
         </script>
         <script async defer
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtwsIAijZ2TTUVQ3tz2u_YuDPpiBXEF6k&callback=initMap">
