@@ -18,8 +18,7 @@
     @Html.TextBoxFor(model => model.Feedback, new { @class = "form-control", @placeholder = "Feedback" })
     @Html.ValidationMessageFor(m => m.Feedback)
     <br />
-    @Html.TextBoxFor(model => model.User, new { @class = "form-control", @placeholder = "User" })
-    @Html.ValidationMessageFor(m => m.User)
+    <input type="hidden" value=@User.Identity.Name name="User" />
     <br />
     
     <input type="submit" value="Submit" class="btn btn-success btn-lg" />
