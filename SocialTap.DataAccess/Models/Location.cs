@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SocialTap.DataAccess.Models.RatingSystem;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
@@ -26,10 +27,16 @@ namespace SocialTap.DataAccess.Models
         public float Longitude { get; set; }
 
         public ICollection<Drink> Drinks { get; set; }
+        public ICollection<LocationAward> Awards { get; set; }
+        public IReadOnlyCollection<UserRating> UsersRatings { get; set; }
+
+        public int RatingOfCapture { get; set; }
 
         public Location()
         {
             Drinks = new Collection<Drink>();
+            UsersRatings = new Collection<UserRating>();
+            Awards = new Collection<LocationAward>();
         }
     }
 }

@@ -1,0 +1,21 @@
+﻿@model SocialTap.WEB.ViewModels.AwardViewModel
+@{
+    ViewBag.Title = "PostAward";
+}
+
+<h2>PostAward</h2>
+
+@using (Html.BeginForm("PostAward", "Awards", FormMethod.Post))
+{
+    @Html.TextBoxFor(model => model.Award.Name, new { @class = "form-control", @placeholder = "Name" })
+    @Html.ValidationMessageFor(model => model.Award.Name)
+    <br />
+        @Html.DropDownListFor(model => model.LocationId, new SelectList(Model.Locations, "Id", "Name"), "", new { @class = "form-control", @placeholder = "Awards" })
+        @Html.ValidationMessageFor(model => model.LocationId)
+        <br />
+        @Html.TextBoxFor(model => model.Award.RequiredPoints, new { @class = "form-control", @placeholder = "Points" })
+        @Html.ValidationMessageFor(model => model.Award.RequiredPoints)
+        <br />
+       
+        <input type="submit" value="Submit" class="btn btn-success btn-lg" />
+}

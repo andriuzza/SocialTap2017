@@ -2,47 +2,52 @@
 @{
     ViewBag.Title = "Home Page";
 }
+<div class="bodyR">
+    <div class="row">
+        <img id="imgAuto"style="display: block; margin: 0 auto;" id="img_logo" alt="Logo" height="200" width="270" src="https://dl.dropboxusercontent.com/s/ppblheo5ln4mk0x/pwl-logo-fp.jpg" />
+    </div>
 
-<div class="row">
-    <img style="display: block; margin: 0 auto;" id="img_logo" alt="Logo" height="200" width="270" src="@Url.Content("~/Content/Images/pwl-logo-fp.jpg")" />
-</div>
-<div style="  width: 100%;">
-    
-    @using (Html.BeginForm("Index", "Home", FormMethod.Post,
-                            new { enctype = "multipart/form-data" }))
-    {
+    <div style="  width: 100%;">
+
+        @using (Html.BeginForm("Index", "Home", FormMethod.Post,
+                                new { enctype = "multipart/form-data" }))
+        {
 
             @Html.HiddenFor(x => x.Latitude, new { latitude = "Latitude" })
             @Html.HiddenFor(x => x.Longitude, new { longitude = "Longitude" })
-        <div class="col-md-offset-4">
-            <label for="file">Upload Image:</label>
-            <div class="form-group">
-                <span class="btn btn-default btn-file" style="width:380px;">Select
-                    <input class="btn btn-default" type="file" name="file" id="file" style="width: 100%;" />
-                </span>
-                @if(ViewBag.NoFile != null)
-                {
-                    <p class="text-danger">@ViewBag.NoFile</p>
-                }
-            </div>
-            <div class="form-group">
-                <label>Pubs</label>
-                @Html.DropDownListFor(model => model.LocationId, new SelectList(Model.Locations, "Id", "Name"), "", new { @class = "form-control HomePage", @placeholder = "Pubs" })
-                @Html.ValidationMessageFor(model => model.LocationId, null, new {@class="text-danger" })
-            </div>
+            <div class="col-md-offset-4">
+                <label for="file">Upload Image:</label>
+                <div class="form-group">
+                    <span class="btn btn-default btn-file" style="width:380px;">
+                        Select
+                        <input class="btn btn-default" type="file" name="file" id="file" style="width: 100%;" />
+                    </span>
+                    @if (ViewBag.NoFile != null)
+                    {
+                        <p class="text-danger">@ViewBag.NoFile</p>
+                    }
+                </div>
+                <div class="form-group">
+                    <label>Pubs</label>
+                    @Html.DropDownListFor(model => model.LocationId, new SelectList(Model.Locations, "Id", "Name"), "", new { @class = "form-control HomePage", @placeholder = "Pubs" })
+                    @Html.ValidationMessageFor(model => model.LocationId, null, new { @class = "text-danger" })
+                </div>
 
-        </div>
+            </div>
             <div class="row col-md-offset-4">
                 <input id="updateButton" type="submit" value="Submit" class="btn btn-success btn-lg disabled" />
             </div>
 
-        if (@ViewBag.Error != "")
-        {<br/>
+            if (@ViewBag.Error != "")
+            {<br />
             <p style="color:red; text-align: center; font-size:18px; font-weight:bold;">@ViewBag.Error</p>
+            }
         }
-    }
-        </div>
-        <script type="text/javascript">
+
+    </div>
+</div>
+    <script type="text/javascript">
+       
             if (sessionStorage.getItem("latitude") === null && sessionStorage.getItem("longitude") === null) {
                 console.log("axxx");
                 function initMap() {

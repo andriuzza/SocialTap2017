@@ -47,7 +47,7 @@ namespace SocialTap.WEB.Controllers
                 return View(ViewRating);
             }
                 string path = "";
-            if (file != null)
+      /*      if (file != null)
             {
                 try
                 {
@@ -61,11 +61,11 @@ namespace SocialTap.WEB.Controllers
                 {
                     return View("Sorry, Something get wrong with file loading" + ex.Message);
                 }
-            }
+            }*/
 
             using (ApplicationDbContext _db = new ApplicationDbContext())
             {
-                int rating = Detection.CreateDetection(path);
+                int rating = Detection.CreateDetection(file);
 
                 ViewRating.Rating = rating;
                 DataAccess.Models.Location FoundLocation = _db.Locations

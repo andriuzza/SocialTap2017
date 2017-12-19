@@ -7,16 +7,14 @@ using SocialTap.Contract.Common;
 using SocialTap.Contract.DataContracts;
 using SocialTap.Contract.Repositories;
 using SocialTap.Contract.Services;
-using SocialTap.DataAccess;
 using SocialTap.DataAccess.Models;
 using SocialTap.Web.ViewModels;
 using SocialTap.WEB.Models;
 using System.Web.Mvc;
 using SocialTap.WEB.ViewModels;
 using System.Data.Entity;
-using System.Web.Http;
 using SocialTap.Services.Services;
-using System.Web;
+using SocialTap.Services.Notification_Services;
 
 namespace SocialTap.Web.Controllers
 {
@@ -53,7 +51,6 @@ namespace SocialTap.Web.Controllers
             {
                 _typeService.Add(drink);
                 ModelState.Clear();
-
                 return View();
             }
 
@@ -106,14 +103,19 @@ namespace SocialTap.Web.Controllers
 
             if (validaiton.IsSuccess)
             {
+                var LocationName = _db.Locations.Where(a => a.Id == viewModel.LocationId).Select(b => b.Name).First();
+
+                NewDrinkInserted insert = new NewDrinkInserted(viewModel.Drink.Price, viewModel.Drink.Name, LocationName);
+                NotificationHandling handler = new NotificationHandling(new SendNotification(), insert.Message);
                 viewModel.Message = "Success!";
                 return View(viewModel);
             }
 
             viewModel.Message = validaiton.ErrorMessage;
+           
+
             return View(viewModel);
         }
-        
 
         public ActionResult InsertRating(RatingViewModel RatingView)
         {
@@ -156,6 +158,7 @@ namespace SocialTap.Web.Controllers
 
 
             }
+            ViewBag.LocationId = RatingView.LocationId;
             showUserList.Drinks = drinks;
             return View(showUserList);
         }
@@ -185,9 +188,7 @@ namespace SocialTap.Web.Controllers
 
             var result = PagedService<DrinksInfoDto>.GetDrinks(sortOrder, drinks);
 
-
-
-            int pageSize = 3;
+            int pageSize = 5;
             return View(await PagedService<Drink>.CreateAsync(result.AsNoTracking(), page ?? 1, pageSize));
 
         }
@@ -215,6 +216,18 @@ namespace SocialTap.Web.Controllers
             ViewBag.Message = "Error";
           
             return RedirectToAction("Edit", new { id= drink.Id});
+        }
+    }
+    public class NewDrinkInserted
+    {
+        public string Message { get; set; }
+        public NewDrinkInserted(decimal Price, string Drink, string Pub)
+        {
+            Message = Convert(Price, Drink, Pub);
+        }
+        public string Convert(decimal Price, string Drink, string Pub)
+        {
+            return "New drink " + Drink + " appeared in " + Pub + "(" + Price + ")"; ;
         }
     }
 }

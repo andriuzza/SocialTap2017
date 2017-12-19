@@ -4,25 +4,26 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Drawing;
+using System.Web;
 
 namespace SocialTap.Services.Services.Recognition
 {
    public static class Detection
    {
-        public static int CreateDetection(string path)
+        public static int CreateDetection(HttpPostedFileBase file)
         {
-            Image beerImage = Image.FromFile(path, true);
-
+            //  Image beerImage = Image.FromFile(path, true);
+            Image beerImage= Image.FromStream(file.InputStream, true, true);
             Bitmap beerImageBitMap = new Bitmap(beerImage);
-            Bitmap beerImageBitMapUntouched = new Bitmap(Image.FromFile(path, true));
+            Bitmap beerImageBitMapUntouched = new Bitmap(Image.FromStream(file.InputStream, true, true));
             
 
             int beerImageHeight = beerImageBitMap.Height;
             int beerImageWidth = beerImageBitMap.Width;
 
             Bitmap filteredBlackOrWhiteImage = GetFilteredBeerColors(beerImageBitMap);
-            //filteredBlackOrWhiteImage = Blur(filteredBlackOrWhiteImage, 30);
-            (filteredBlackOrWhiteImage as Image).Save("C:/Users/PC/Desktop/ConsoleApp1/beerEditedBlackWhite.jpg");
+ //           filteredBlackOrWhiteImage = Blur(filteredBlackOrWhiteImage, 30);
+          //  (filteredBlackOrWhiteImage as Image).Save("C:/Users/PC/Desktop/ConsoleApp1/beerEditedBlackWhite.jpg");
             
             Bitmap croppedOriginalImage = cropImage(beerImageBitMapUntouched, filteredBlackOrWhiteImage);
             Image<Bgr, Byte> edgeImage = new Image<Bgr, Byte>(croppedOriginalImage);

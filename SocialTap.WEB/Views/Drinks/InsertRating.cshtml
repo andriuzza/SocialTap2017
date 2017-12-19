@@ -8,7 +8,7 @@
             <h2>@Model.PubName</h2>
             <p>@Model.Address Street</p>
             <hr />
-            <p>Your rating of a drink <bold>@Model.Rating</bold></p>
+            <p>Your volume of a drink <bold style="font-size:35px; color:royalblue; font-style:normal;">@Model.Rating %</bold></p>
             <table id="rating" class="table">
                 <thead>
                     <tr>
@@ -62,7 +62,7 @@
                     });
                     // when we click on the flag, the text field with an input should pop out
                     var infoWindow = new google.maps.InfoWindow({
-                        content: '<h3 style="color:black">@Model.PubName</h3> <h4 style="color:black">@Model.Address</h4>  <input type="text" class="form-control" placeholder="Put your rating"> '
+                        content: '<h3 style="color:black">Your Location</h3> '
                     });
                     marker.addListener('click', function () {
                         infoWindow.open(map, marker);
@@ -79,16 +79,22 @@
 @section scripts{
     <script>
         $(document).ready(function () {
-            $("#rating .sendRating").on("click", function () {
+            $(".sendRating").on("click", function () {
                 var button = $(this);
+                var locId = @ViewBag.LocationId;
+                console.log(locId);
                 var selectId = $(this).attr("data-rating-id")
-                console.log($(this).attr("data-rating-id"));
+                
                 bootbox.confirm("Insert your rating?", function (result) {
                     if (result) {
-                        console.log("aa");
                         $.post("http://localhost:59427/api/drinks/postRating", {
                             rating: @Model.Rating,
                             drinkId: selectId
+                        });
+
+
+                        $.post("http://localhost:59427/api/ratings/?LocationId=@ViewBag.LocationId", {
+                       //     locationId: locId    
                         });
                     }
                 });

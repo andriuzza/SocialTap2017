@@ -17,9 +17,9 @@ namespace SocialTap.DataAccess.Repositories
 {
     public class GeneralData : IGeneralData
     {
-        private const string ConnectionString = "Data Source=(LocalDb)\\MSSQLLocalDB;" +
-                                                "Initial Catalog=SocialTapDB;" +
-                                                "Integrated Security=True";
+        private const string ConnectionString = "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=SocialTapDB;Integrated Security=True;" +
+            "Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;" +
+            "ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
         private readonly ApplicationDbContext _db;
         private readonly ISortingService _sorting;
@@ -77,12 +77,9 @@ namespace SocialTap.DataAccess.Repositories
 
 
             return CommonResult<IEnumerable<LocationFeedbackDto>>
-                .Success<IEnumerable<LocationFeedbackDto>>(loc);
-            
-
-            
+                .Success(loc);      
         }
-        /*---------------*/
+
         public IEnumerable<NotificationDto> GetNotifications(string UserId)
         {
 
@@ -113,7 +110,6 @@ namespace SocialTap.DataAccess.Repositories
             }
             _db.SaveChangesAsync();
         }
-        /*----------------------*/
         public CommonResult<IEnumerable<LocationFormDto>> ShowBarsInformaiton(string sortOrder, string searchString = null)
         {
             if (_db.Locations.Count() == 0)
@@ -129,7 +125,6 @@ namespace SocialTap.DataAccess.Repositories
             var select = new SqlCommand("SELECT Name, Address, Latitude, Longitude" +
                                                " FROM Locations", con);
 
-        //    select.Parameters.AddWithValue("@Name", searchString);
             adapter.SelectCommand = select;
 
             var ds = new DataSet();

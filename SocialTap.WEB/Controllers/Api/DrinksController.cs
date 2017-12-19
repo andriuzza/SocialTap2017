@@ -19,7 +19,6 @@ namespace SocialTap.WEB.Controllers.Api
         }
 
         [HttpPost]
-       // [Route("api/[controller]/[action]")]
         public async Task<IHttpActionResult> PostRating([FromBody] DrinkRatingDto rating)
        {
             var result = await _data.SendRatingAsync(rating);

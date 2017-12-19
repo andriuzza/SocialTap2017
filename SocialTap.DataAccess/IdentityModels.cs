@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using SocialTap.DataAccess.Models;
 using SocialTap.DataAccess.Models.Feedbacks;
 using SocialTap.DataAccess.Models.Notifications;
+using SocialTap.DataAccess.Models.RatingSystem;
 
 namespace SocialTap.WEB.Models
 {
@@ -17,11 +18,16 @@ namespace SocialTap.WEB.Models
     {
       
         public ICollection<NotificationUser> Notifications { get; set; }
+        public ICollection<UserRating> LocationRatings { get; set; }
+        public ICollection<UserAward> Awards { get; set; }
 
         public ApplicationUser()
         {
             Notifications = new Collection<NotificationUser>();
+            LocationRatings = new Collection<UserRating>();
+            Awards = new Collection<UserAward>();
         }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -46,6 +52,9 @@ namespace SocialTap.WEB.Models
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<NotificationUser> NotificationUsers { get; set; }
         public DbSet<DrinkRating> DrinkRating { get; set; }
+        public DbSet<UserRating> UserRatings { get; set; }
+        public DbSet<LocationAward> Awards { get; set; }
+        public DbSet<UserAward> UserAwards { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -56,6 +65,8 @@ namespace SocialTap.WEB.Models
                 .WithMany(e => e.Drinks)
                 .HasForeignKey(a => a.LocationOfDrinkId)
                 .WillCascadeOnDelete(true);
+
+            
 
 
             /*  modelBuilder.Entity<NotificationUser>()

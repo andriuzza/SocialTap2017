@@ -56,6 +56,7 @@ namespace SocialTap.WEB
             container.RegisterType<ManageController>(new InjectionConstructor());
 
 
+            container.RegisterType<IRatingRepository, RatingRepository>();
             container.RegisterType<ISortingService, SortingService>();
             container.RegisterType<ISystemService<DrinkDto>, SystemService>();
             container.RegisterType<ISystemRepository<LocationFormDto>, LocationsRepository>();

@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -28,6 +29,24 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -100,6 +119,30 @@
     <Compile Include="Migrations\201712130858252_RequiredPropLocation.Designer.cs">
       <DependentUpon>201712130858252_RequiredPropLocation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712141142258_UserRatings.cs" />
+    <Compile Include="Migrations\201712141142258_UserRatings.Designer.cs">
+      <DependentUpon>201712141142258_UserRatings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712141145085_AddCompanyRatingForPhoto.cs" />
+    <Compile Include="Migrations\201712141145085_AddCompanyRatingForPhoto.Designer.cs">
+      <DependentUpon>201712141145085_AddCompanyRatingForPhoto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712150901358_awards.cs" />
+    <Compile Include="Migrations\201712150901358_awards.Designer.cs">
+      <DependentUpon>201712150901358_awards.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712171626163_UserAward.cs" />
+    <Compile Include="Migrations\201712171626163_UserAward.Designer.cs">
+      <DependentUpon>201712171626163_UserAward.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712171627490_asdd.cs" />
+    <Compile Include="Migrations\201712171627490_asdd.Designer.cs">
+      <DependentUpon>201712171627490_asdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712182104375_userawardidchange.cs" />
+    <Compile Include="Migrations\201712182104375_userawardidchange.Designer.cs">
+      <DependentUpon>201712182104375_userawardidchange.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Drink.cs" />
     <Compile Include="Models\DrinkRating.cs" />
@@ -108,8 +151,11 @@
     <Compile Include="Models\DrinkImage.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\Feedbacks\LocationFeedback.cs" />
+    <Compile Include="Models\LocationAward.cs" />
     <Compile Include="Models\Notifications\Notification.cs" />
     <Compile Include="Models\Notifications\NotificationUser.cs" />
+    <Compile Include="Models\RatingSystem\UserRating.cs" />
+    <Compile Include="Models\UserAward.cs" />
     <Compile Include="Notification Services\IServices of Notifications\ISendNotification.cs" />
     <Compile Include="Notification Services\NotificationEventArgs.cs" />
     <Compile Include="Notification Services\NotificationHandling.cs" />
@@ -119,6 +165,7 @@
     <Compile Include="Repositories\FeedbackRepository.cs" />
     <Compile Include="Repositories\GeneralData.cs" />
     <Compile Include="Repositories\LocationsRepository.cs" />
+    <Compile Include="Repositories\RatingRepository.cs" />
     <Compile Include="Repositories\SendDataAsync.cs" />
     <Compile Include="Repositories\SystemRepository.cs" />
   </ItemGroup>
@@ -156,6 +203,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712130858252_RequiredPropLocation.resx">
       <DependentUpon>201712130858252_RequiredPropLocation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712141142258_UserRatings.resx">
+      <DependentUpon>201712141142258_UserRatings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712141145085_AddCompanyRatingForPhoto.resx">
+      <DependentUpon>201712141145085_AddCompanyRatingForPhoto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712150901358_awards.resx">
+      <DependentUpon>201712150901358_awards.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712171626163_UserAward.resx">
+      <DependentUpon>201712171626163_UserAward.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712171627490_asdd.resx">
+      <DependentUpon>201712171627490_asdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712182104375_userawardidchange.resx">
+      <DependentUpon>201712182104375_userawardidchange.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -33,11 +33,12 @@
                             <ul class="dropdown-menu">
                                 <li>@Html.ActionLink("Add a new drink", "Post", "Drinks")</li>
                                 <li>@Html.ActionLink("Add a new pub", "Post", "Locations")</li>
+                                <li>@Html.ActionLink("Add a new Award", "PostAward", "Awards")</li>
                             </ul>
                         </li>
 
                         <li class="Show"><a><i class="glyphicon glyphicon-shopping-cart"></i><span class="badge" id="notCount"></span></a></li>
-
+                        <li>@Html.ActionLink("Your Points", "ShowPoints", "Locations")</li>
                         
 
 
@@ -52,9 +53,7 @@
                             </ul>
                         </li>
                     }
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                   
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -85,7 +84,7 @@
 
         $(".Show").click(function () {
     
-            $.post("http://localhost:59427/api/notifications", function (data) {
+            $.post("/api/notifications", function (data) {
                 GettingData();
             });
         })
@@ -95,7 +94,7 @@
         function GettingData() {
             string: [];
             $.ajax({
-                url: 'http://localhost:59427/api/notifications',
+                url: '/api/notifications',
 
                 type: 'GET',
 

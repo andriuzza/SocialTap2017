@@ -1,0 +1,97 @@
+﻿@model IQueryable<SocialTap.Contract.DataContracts.UserLocation>
+@{
+    ViewBag.Title = "ShowPoints";
+}
+
+<p style="font-size: 30px;">Your <b>points</b> from all pubs</p>
+<hr />
+@{ 
+    var index = 1;
+}
+
+
+
+<div class="panel-group" id="accordion">
+@foreach (var a in Model)
+{
+    var naujas = "collapse" + index.ToString();
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#@naujas">@a.LocationName <span class="badge">@a.UserPoints</span></a>
+            </h4>
+        </div>
+        <div id="@naujas" class="panel-collapse collapse in">
+
+    <div class="list-group" id="rating">
+        @foreach (var item in a.Awards)
+        {
+            int number;
+            if (item.RequierdPoints > a.UserPoints)
+            {
+                number = item.RequierdPoints - a.UserPoints;
+            }
+            else
+            {
+                number = a.UserPoints - item.RequierdPoints;
+            }
+            <div>
+                <a style="background-color:indianred; color:white;" href="#" class="list-group-item">@item.Name Points Required @item.RequierdPoints </a>
+                @if (item.RequierdPoints > a.UserPoints)
+                {
+                    <button class="btn btn-default disabled list-group-item" >GetAward</button>
+                }
+                else
+                {
+                    <a data-id="@item.Name" class="btn btn-default list-group-item sendRating1">GetAward</a>
+                }
+            </div>
+        }
+        @if (!a.Awards.Any())
+        {
+            <a style="background-color:indianred; color:white;" href="#" class="list-group-item"> No Awards yet</a>
+        }
+        </div>
+        </div>
+    </div>
+    index++;
+        }
+   </div> 
+@{ 
+    var link = "";
+    ViewBag.link = "";
+}
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $(".sendRating1").on("click", function () {
+                console.log('hello')
+                var button = $(this);
+                var name = $(this).attr("data-id");
+                name.toString();
+                console.log(name);
+
+
+            /*    bootbox.confirm("Insert your rating?", function (result) {
+                    if (result) {
+                        $.post("/api/awards/getaward", {
+                            awardName = name;
+                        });*/
+
+
+                  bootbox.confirm("Get your award?", function (result) {
+                      if (result) {
+                         
+                           console.log(name);
+                           $.post("http://localhost:59427/api/awards/getAward/?AwardName="+name, {
+                               //  awardName: name
+                           });
+
+
+                    }
+                });
+
+            });
+        });
+    </script>
+}
